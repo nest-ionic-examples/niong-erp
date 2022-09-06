@@ -1,6 +1,7 @@
 import { ObjectId } from 'bson';
-import { Prop } from '@nestjs/mongoose';
+import { Prop, Schema } from '@nestjs/mongoose';
 
+@Schema({collection: 'birthdays'})
 export class Birthday {
   _id: string | ObjectId;
 

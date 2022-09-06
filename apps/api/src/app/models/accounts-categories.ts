@@ -1,8 +1,9 @@
 import { ActionBy } from './action-by';
-import { Prop, SchemaFactory } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Types } from 'mongoose';
 import ObjectId = Types.ObjectId
 
+@Schema({collection: 'accountsCategories'})
 export class AccountsCategories {
   _id: ObjectId;
 

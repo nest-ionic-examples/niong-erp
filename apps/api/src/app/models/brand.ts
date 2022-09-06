@@ -1,6 +1,7 @@
 import { ObjectId } from 'bson';
-import { Prop } from '@nestjs/mongoose';
+import { Prop, Schema } from '@nestjs/mongoose';
 
+@Schema({collection: 'Brand'})
 export class Brand {
   _id: string | ObjectId;
 

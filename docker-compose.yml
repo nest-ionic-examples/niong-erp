@@ -7,8 +7,8 @@ services:
     volumes:
       - ./dc-files/mongo:/docker-entrypoint-initdb.d
     environment:
-#      MONGO_INITDB_ROOT_USERNAME: root
-#      MONGO_INITDB_ROOT_PASSWORD: Password1@3
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: Password1@3
       MONGO_INITDB_DATABASE: saas
   redis:
     image: redis

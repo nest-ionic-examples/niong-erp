@@ -9,6 +9,9 @@ import { AccountTypesController } from './controllers/account-types.controller';
 import { AccountsCategoriesController } from './controllers/accounts-categories.controller';
 import { BillOfMaterialsController } from './controllers/bill-of-materials.controller';
 import { BonusTypesController } from './controllers/bonus-types.controller';
+import mongoose from 'mongoose';
+
+mongoose.set('debug', true)
 
 @Module({
   imports: [
