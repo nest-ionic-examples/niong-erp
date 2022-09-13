@@ -1,30 +1,31 @@
 import { Body, Controller, Get, Inject, Post, UnauthorizedException } from '@nestjs/common';
-// import { InjectModel } from 'nestjs-typegoose';
-import { User, UserModel } from '../models/user';
+import { InjectModel } from '@nestjs/mongoose';
+import { User } from '../models/user';
 import { sign } from 'jsonwebtoken';
 import { compare, hash } from 'bcrypt';
 import { CurrentUser } from './current-user.decorator';
+import { Model } from 'mongoose';
 
 @Controller('')
 export class AuthController {
-  constructor(@Inject(UserModel) private userModel/*: ReturnModelType<typeof User>*/) {}
+  constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
   @Post('login')
   async login(@Body() credentials) {
     const user = await this.userModel.findOne({user: credentials.username}).exec();
     if (!user) throw new UnauthorizedException('The username/password combination is invalid');
 
-    const isMatch = await compare(credentials.password, user.password);
+    const isMatch = await compare(credentials.password, user.pass);
     if (!isMatch) throw new UnauthorizedException('The username/password combination is invalid');
 
-    user.loggedIn = true;
+    // user.credentials = {};
 
     await user.save();
 
     return {token: sign({
         _id: user._id,
-        user: user.username,
-        role: user.role,
+        user: user.login,
+        role: user.login,
       }, process.env.JWT_SECRET_PASSWORD, {expiresIn: '1h'})};
   }
 

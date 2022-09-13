@@ -21,8 +21,10 @@ export class AccountCategory {
   users: ObjectID[];
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      user: {type: ObjectId, ref: 'Users', default: null},
+      date: {type: Date, default: Date.now}
+    }
   })
   createdBy: {
     user: ObjectID,
@@ -30,8 +32,10 @@ export class AccountCategory {
   };
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      user: {type: ObjectId, ref: 'Users', default: null},
+      date: {type: Date, default: Date.now}
+    }
   })
   editedBy: {
     user: ObjectID,

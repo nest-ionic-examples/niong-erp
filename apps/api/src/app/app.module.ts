@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import mongoose from 'mongoose';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ModelsModule } from './models/models.module';
 import { environment } from '../environments/environment';
@@ -9,7 +8,7 @@ import { AccountTypesController } from './controllers/account-types.controller';
 import { AccountsCategoriesController } from './controllers/accounts-categories.controller';
 import { BillOfMaterialsController } from './controllers/bill-of-materials.controller';
 import { BonusTypesController } from './controllers/bonus-types.controller';
-import mongoose from 'mongoose';
+import { BirthdaysController } from './controllers/birthdays.controller';
 
 mongoose.set('debug', true)
 
@@ -22,12 +21,12 @@ mongoose.set('debug', true)
     ModelsModule,
   ],
   controllers: [
-    AppController,
     AccountTypesController,
     AccountsCategoriesController,
     BillOfMaterialsController,
+    BirthdaysController,
     BonusTypesController,
   ],
-  providers: [AppService],
+  providers: [],
 })
 export class AppModule {}

@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 @Schema({collection: 'birthdays'})
-export class Birthdays {
+export class Birthday {
   @Prop({type: Number, default: 1})
   _id: number;
 
@@ -9,9 +9,11 @@ export class Birthdays {
   date: Date;
 
   @Prop({
-    weekly: Array,
-    nextweek: Array,
-    monthly: Array
+    type: {
+      weekly: Array,
+      nextweek: Array,
+      monthly: Array
+    }
   })
   currentEmployees: {
     weekly: [],
@@ -20,4 +22,4 @@ export class Birthdays {
   };
 }
 
-export const birthdaysSchema = SchemaFactory.createForClass(Birthdays);
+export const birthdaysSchema = SchemaFactory.createForClass(Birthday);

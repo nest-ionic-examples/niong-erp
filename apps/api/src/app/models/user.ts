@@ -158,8 +158,20 @@ export class User {
     conflictedItems: {type: Array},
     importedCount: {type: Number, default: 0}
   })
-  imports: { type: string, default: '' };
-
+  imports: {
+    fileName: string,
+    filePath: string,
+    timeStamp: number,
+    stage: number,
+    map: {type: JSON},
+    unMap: {type: JSON},
+    type: string,
+    comparingField: string,
+    delimiter: string,
+    skipped: [],
+    conflictedItems: [],
+    importedCount: number
+  };
 }
 
 export const userSchema = SchemaFactory.createForClass(User);
