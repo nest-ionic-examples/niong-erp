@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 
 @Schema({collection: 'countries'})
-export class Countries {
+export class Country {
   @Prop({type: String, default: ''})
   _id: string;
 
@@ -14,4 +14,4 @@ export class Countries {
 
 }
 
-export const countriesSchema = SchemaFactory.createForClass(Countries);
+export const countriesSchema = SchemaFactory.createForClass(Country);

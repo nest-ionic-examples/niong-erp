@@ -1,7 +1,7 @@
 import { Controller } from '@nestjs/common';
 import { ReadController } from './core/read.controller';
 import { InjectModel } from '@nestjs/mongoose';
-import { BillOfMaterial } from '../models/billOfMaterial';
+import { BillOfMaterial } from '../models/bill-of-material';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Bill of Materials')

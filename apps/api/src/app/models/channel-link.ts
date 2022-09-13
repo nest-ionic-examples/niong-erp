@@ -5,7 +5,7 @@ import ObjectId = mongoose.Schema.Types.ObjectId;
 
 
 @Schema({collection: 'channelLinks'})
-export class ChannelLinks {
+export class ChannelLink {
   @Prop({type: ObjectId, ref: 'Product', default: null})
   product: ObjectID;
 
@@ -23,4 +23,4 @@ export class ChannelLinks {
 
 }
 
-export const channelLinksSchema = SchemaFactory.createForClass(ChannelLinks);
+export const channelLinkSchema = SchemaFactory.createForClass(ChannelLink);

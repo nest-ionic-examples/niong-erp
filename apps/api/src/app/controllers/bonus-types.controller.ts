@@ -1,7 +1,7 @@
 import { Controller } from '@nestjs/common';
 import { ReadController } from './core/read.controller';
 import { InjectModel } from '@nestjs/mongoose';
-import { BonusType } from '../models/bonusType';
+import { BonusType } from '../models/bonus-type';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Bonus Types')

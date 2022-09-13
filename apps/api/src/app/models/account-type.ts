@@ -12,4 +12,4 @@ export class AccountType {
 
 }
 
-export const AccountTypeSchema = SchemaFactory.createForClass(AccountType);
+export const accountTypeSchema = SchemaFactory.createForClass(AccountType);

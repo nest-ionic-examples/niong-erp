@@ -4,7 +4,7 @@ import * as mongoose from 'mongoose';
 import ObjectId = mongoose.Schema.Types.ObjectId;
 
 @Schema({collection: 'payrollStructureTypes'})
-export class PayrollStructureTypes {
+export class PayrollStructureType {
   @Prop({type: String, default: ''})
   name: string;
 
@@ -16,4 +16,4 @@ export class PayrollStructureTypes {
 
 }
 
-export const payrollStructureTypesSchema = SchemaFactory.createForClass(PayrollStructureTypes);
+export const payrollStructureTypeSchema = SchemaFactory.createForClass(PayrollStructureType);

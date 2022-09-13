@@ -1,7 +1,7 @@
 import { Controller } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { ReadController } from './core/read.controller';
-import { AccountCategory } from '../models/accountsCategories';
+import { AccountCategory } from '../models/account-category';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Accounts Categories')

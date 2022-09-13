@@ -4,7 +4,7 @@ import * as mongoose from 'mongoose';
 import ObjectId = mongoose.Schema.Types.ObjectId;
 
 @Schema({collection: 'orgSettings'})
-export class OrgSettings {
+export class OrganizationSetting {
   @Prop()
   name: string;
 
@@ -90,4 +90,4 @@ export class OrgSettings {
 
 }
 
-export const orgSettingsSchema = SchemaFactory.createForClass(OrgSettings);
+export const orgSettingsSchema = SchemaFactory.createForClass(OrganizationSetting);

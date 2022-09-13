@@ -4,7 +4,7 @@ import * as mongoose from 'mongoose';
 import ObjectId = mongoose.Schema.Types.ObjectId;
 
 @Schema({collection: 'CustomReport'})
-export class CustomReports {
+export class CustomReport {
   @Prop({type: String, default: 'Report'})
   name: string;
 
@@ -60,4 +60,4 @@ export class CustomReports {
 
 }
 
-export const CustomReportsSchema = SchemaFactory.createForClass(CustomReports);
+export const CustomReportsSchema = SchemaFactory.createForClass(CustomReport);

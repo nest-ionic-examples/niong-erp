@@ -4,7 +4,7 @@ import * as mongoose from 'mongoose';
 import ObjectId = mongoose.Schema.Types.ObjectId;
 
 @Schema({collection: 'expensesCategories'})
-export class Category {
+export class ExpenseCategory {
   @Prop({type: String, default: 'All'})
   name: string;
 
@@ -61,7 +61,7 @@ export class Category {
 
 }
 
-export const CategorySchema = SchemaFactory.createForClass(Category);
+export const ExpenseCategorySchema = SchemaFactory.createForClass(ExpenseCategory);
 
 
 

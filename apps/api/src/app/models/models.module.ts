@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { BillOfMaterial, billOfMaterialSchema } from './billOfMaterial';
-import { BonusType, bonusTypeSchema } from './bonusType';
-import { AccountCategory, AccountCategorySchema } from './accountsCategories';
-import { AccountType, AccountTypeSchema } from './accountTypes';
+import { BillOfMaterial, billOfMaterialSchema } from './bill-of-material';
+import { BonusType, bonusTypeSchema } from './bonus-type';
+import { AccountCategory, accountCategorySchema } from './account-category';
+import { AccountType, accountTypeSchema } from './account-type';
 import { Birthday, birthdaysSchema } from './birthday';
 
 const providers = MongooseModule.forFeature([
-  {name: AccountCategory.name, schema: AccountCategorySchema},
-  {name: AccountType.name, schema: AccountTypeSchema},
+  {name: AccountCategory.name, schema: accountCategorySchema},
+  {name: AccountType.name, schema: accountTypeSchema},
   {name: BillOfMaterial.name, schema: billOfMaterialSchema},
   {name: Birthday.name, schema: birthdaysSchema},
   {name: BonusType.name, schema: bonusTypeSchema},

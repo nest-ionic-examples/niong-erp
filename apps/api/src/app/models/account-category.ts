@@ -59,4 +59,4 @@ export class AccountCategory {
 
 }
 
-export const AccountCategorySchema = SchemaFactory.createForClass(AccountCategory);
+export const accountCategorySchema = SchemaFactory.createForClass(AccountCategory);

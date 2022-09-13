@@ -4,7 +4,7 @@ import * as mongoose from 'mongoose';
 import ObjectId = mongoose.Schema.Types.ObjectId;
 
 @Schema({collection: 'Opportunities'})
-export class Opportunities {
+export class Opportunity {
   @Prop({type: Boolean, default: false, index: true})
   isOpportunitie: boolean;
 
@@ -225,4 +225,4 @@ export class Opportunities {
 
 }
 
-export const opportunitiesSchema = SchemaFactory.createForClass(Opportunities);
+export const opportunitySchema = SchemaFactory.createForClass(Opportunity);
