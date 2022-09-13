@@ -1,13 +1,12 @@
-import { ObjectId } from 'bson';
-import { Prop, Schema } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 @Schema({collection: 'Brand'})
 export class Brand {
-  _id: string | ObjectId;
-
-  @Prop({default: 'default'})
+  @Prop({type: String, default: 'default'})
   name: string;
 
-  @Prop({default: Date.now})
+  @Prop({type: Date, default: Date.now})
   creationDate: Date;
 }
+
+export const BrandSchema = SchemaFactory.createForClass(Brand);

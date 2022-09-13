@@ -1,17 +1,23 @@
-import { ObjectId } from 'bson';
-import { Prop, Schema } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 @Schema({collection: 'birthdays'})
-export class Birthday {
-  _id: string | ObjectId;
+export class Birthdays {
+  @Prop({type: Number, default: 1})
+  _id: number;
 
   @Prop()
   date: Date;
 
-  @Prop()
+  @Prop({
+    weekly: Array,
+    nextweek: Array,
+    monthly: Array
+  })
   currentEmployees: {
     weekly: [],
     nextweek: [],
     monthly: []
   };
 }
+
+export const birthdaysSchema = SchemaFactory.createForClass(Birthdays);

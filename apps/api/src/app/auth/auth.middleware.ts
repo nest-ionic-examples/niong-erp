@@ -1,13 +1,14 @@
-import { Inject, Injectable, NestMiddleware, UnauthorizedException } from '@nestjs/common';
-// import { InjectModel } from 'nestjs-typegoose';
-import { User, UserModel } from '../models/user';
+import { Injectable, NestMiddleware, UnauthorizedException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { User } from '../models/user';
 import { expressjwt } from 'express-jwt';
 import { JwtPayload } from 'jsonwebtoken';
 import { environment } from '../../environments/environment';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
-  constructor(@Inject(UserModel) private readonly userModel/*: ReturnModelType<typeof User>*/) {}
+  constructor(@InjectModel(User.name) private readonly userModel: Model<User>) {}
 
   use(req, res, next) {
     expressjwt({
@@ -20,7 +21,7 @@ export class AuthMiddleware implements NestMiddleware {
         }
 
         const user = await this.userModel.findById(payload._id).exec();
-        if (!user || !user.loggedIn) throw new UnauthorizedException('The user has been logged out');
+        if (!user || !user.login) throw new UnauthorizedException('The user has been logged out');
 
         return false;
       },

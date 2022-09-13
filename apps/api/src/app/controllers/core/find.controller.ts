@@ -1,5 +1,6 @@
 import { Get, Query } from '@nestjs/common';
 import { ParseOptionalIntPipe } from '../../pipes/parse-optional-int.pipe';
+import { Model } from 'mongoose';
 
 export interface Page<T> {
   number: number;
@@ -10,11 +11,11 @@ export interface Page<T> {
 
 export class FindController<T> {
 
-  protected constructor(protected model/*: ReturnModelType<AnyParamConstructor<T>>*/) {}
+  protected constructor(protected model: Model<T>) {}
 
   @Get()
-  async find(@Query('page', ParseOptionalIntPipe) number: number = 1,
-             @Query('size', ParseOptionalIntPipe) size: number = 20,
+  async find(@Query('page', ParseOptionalIntPipe) number = 1,
+             @Query('size', ParseOptionalIntPipe) size = 20,
              @Query('sort') sort: string,
              where?): Promise<T | T[] | Page<T>> {
     if (size === 1) {

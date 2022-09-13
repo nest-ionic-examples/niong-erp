@@ -1,8 +1,7 @@
-import { Prop, Schema } from '@nestjs/mongoose';
-
-import mongoose from 'mongoose';
-import Types = mongoose.Schema.Types;
-import { ObjectId } from 'bson';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { ObjectID } from 'bson';
+import * as mongoose from 'mongoose';
+import ObjectId = mongoose.Schema.Types.ObjectId;
 
 @Schema({collection: 'Capacity'})
 export class Capacity {
@@ -10,25 +9,25 @@ export class Capacity {
   ID: number;
 
   @Prop({
-    _id: {type: Types.ObjectId, ref: 'Employees', default: null},
+    _id: {type: ObjectId, ref: 'Employees', default: null},
     name: String
   })
   employee: {
-    _id: string | ObjectId,
-    name: string
-  }
-
-  @Prop({
-    _id: { type: Types.ObjectId, ref: 'Department', default: null },
-    name: String
-  })
-  department: {
-    _id: string | ObjectId,
+    _id: ObjectID,
     name: string
   };
 
-  @Prop({ type: Types.ObjectId, ref: 'Vacation', default: null })
-  vacation: string | ObjectId;
+  @Prop({
+    _id: {type: ObjectId, ref: 'Department', default: null},
+    name: String
+  })
+  department: {
+    _id: ObjectID,
+    name: string
+  };
+
+  @Prop({type: ObjectId, ref: 'Vacation', default: null})
+  vacation: ObjectID;
 
   @Prop()
   month: number;
@@ -42,3 +41,8 @@ export class Capacity {
   @Prop()
   capacityMonthTotal: number;
 }
+
+export const capacitySchema = SchemaFactory.createForClass(Capacity);
+
+
+capacitySchema.set('toJSON', {virtuals: true});
