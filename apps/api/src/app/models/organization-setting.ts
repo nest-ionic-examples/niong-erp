@@ -9,12 +9,14 @@ export class OrganizationSetting {
   name: string;
 
   @Prop({
-    street: {type: String, default: ''},
-    city: {type: String, default: ''},
-    state: {type: String, default: ''},
-    zip: {type: String, default: ''},
-    fax: {type: String, default: ''},
-    country: {type: String, default: ''}
+    type: {
+      street: {type: String, default: ''},
+      city: {type: String, default: ''},
+      state: {type: String, default: ''},
+      zip: {type: String, default: ''},
+      fax: {type: String, default: ''},
+      country: {type: String, default: ''}
+    }
   })
   address: {
     street: string,
@@ -90,4 +92,4 @@ export class OrganizationSetting {
 
 }
 
-export const orgSettingsSchema = SchemaFactory.createForClass(OrganizationSetting);
+export const organizationSettingSchema = SchemaFactory.createForClass(OrganizationSetting);

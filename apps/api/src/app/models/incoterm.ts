@@ -11,4 +11,4 @@ export class Incoterm {
 
 }
 
-export const IncotermSchema = SchemaFactory.createForClass(Incoterm);
+export const incotermSchema = SchemaFactory.createForClass(Incoterm);

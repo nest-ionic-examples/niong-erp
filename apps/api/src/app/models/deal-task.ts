@@ -4,7 +4,7 @@ import * as mongoose from 'mongoose';
 import ObjectId = mongoose.Schema.Types.ObjectId;
 
 @Schema({collection: 'DealTasks'})
-export class Tasks {
+export class DealTask {
   @Prop({type: Number, default: 0})
   taskCount: number;
 
@@ -54,8 +54,10 @@ export class Tasks {
   attachments: [];
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   editedBy: {
     user: ObjectID,
@@ -67,4 +69,4 @@ export class Tasks {
 
 }
 
-export const tasksSchema = SchemaFactory.createForClass(Tasks);
+export const dealTaskSchema = SchemaFactory.createForClass(DealTask);

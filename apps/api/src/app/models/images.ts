@@ -19,4 +19,4 @@ export class Images {
   integrationId: string;
 }
 
-export const ImagesSchema = SchemaFactory.createForClass(Images);
+export const imagesSchema = SchemaFactory.createForClass(Images);

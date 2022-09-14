@@ -8,4 +8,4 @@ export class PaymentType {
 
 }
 
-export const PaymentTypeSchema = SchemaFactory.createForClass(PaymentType);
+export const paymentTypeSchema = SchemaFactory.createForClass(PaymentType);

@@ -11,4 +11,4 @@ export class Source {
 
 }
 
-export const SourceSchema = SchemaFactory.createForClass(Source);
+export const sourceSchema = SchemaFactory.createForClass(Source);

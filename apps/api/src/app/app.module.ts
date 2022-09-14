@@ -4,11 +4,7 @@ import mongoose from 'mongoose';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ModelsModule } from './models/models.module';
 import { environment } from '../environments/environment';
-import { AccountTypesController } from './controllers/account-types.controller';
-import { AccountsCategoriesController } from './controllers/accounts-categories.controller';
-import { BillOfMaterialsController } from './controllers/bill-of-materials.controller';
-import { BonusTypesController } from './controllers/bonus-types.controller';
-import { BirthdaysController } from './controllers/birthdays.controller';
+import { ControllersModule } from './controllers/controllers.module';
 
 mongoose.set('debug', true)
 
@@ -19,13 +15,7 @@ mongoose.set('debug', true)
       pass: environment.db.pass
     }),
     ModelsModule,
-  ],
-  controllers: [
-    AccountTypesController,
-    AccountsCategoriesController,
-    BillOfMaterialsController,
-    BirthdaysController,
-    BonusTypesController,
+    ControllersModule,
   ],
   providers: [],
 })

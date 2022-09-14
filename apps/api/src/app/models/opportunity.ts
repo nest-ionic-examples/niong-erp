@@ -12,9 +12,11 @@ export class Opportunity {
   name: string;
 
   @Prop({
-    value: {type: Number, default: 0},
-    progress: {type: Number, default: 0},
-    currency: {type: String, default: ''}
+    type: {
+      value: {type: Number, default: 0},
+      progress: {type: Number, default: 0},
+      currency: {type: String, default: ''}
+    }
   })
   expectedRevenue: {
     value: number,
@@ -44,11 +46,13 @@ export class Opportunity {
   dateBirth: Date;
 
   @Prop({
-    street: {type: String, default: ''},
-    city: {type: String, default: ''},
-    state: {type: String, default: ''},
-    zip: {type: String, default: ''},
-    country: {type: String, default: ''}
+    type: {
+      street: {type: String, default: ''},
+      city: {type: String, default: ''},
+      state: {type: String, default: ''},
+      zip: {type: String, default: ''},
+      country: {type: String, default: ''}
+    }
   })
   address: {
     street: string,
@@ -59,8 +63,10 @@ export class Opportunity {
   };
 
   @Prop({
-    first: {type: String, default: ''},
-    last: {type: String, default: ''}
+    type: {
+      first: {type: String, default: ''},
+      last: {type: String, default: ''}
+    }
   })
   contactName: {
     first: string,
@@ -71,9 +77,11 @@ export class Opportunity {
   email: string;
 
   @Prop({
-    mobile: {type: String, default: ''},
-    phone: {type: String, default: ''},
-    fax: {type: String, default: ''}
+    type: {
+      mobile: {type: String, default: ''},
+      phone: {type: String, default: ''},
+      fax: {type: String, default: ''}
+    }
   })
   phones: {
     mobile: string,
@@ -94,8 +102,10 @@ export class Opportunity {
   internalNotes: string;
 
   @Prop({
-    desc: {type: String, default: ''},
-    date: {type: Date, default: Date.now}
+    type: {
+      desc: {type: String, default: ''},
+      date: {type: Date, default: Date.now}
+    }
   })
   nextAction: {
     desc: string,
@@ -109,8 +119,10 @@ export class Opportunity {
   priority: string;
 
   @Prop({
-    id: {type: String, default: ''},
-    name: {type: String, default: ''}
+    type: {
+      id: {type: String, default: ''},
+      name: {type: String, default: ''}
+    }
   })
   categories: {
     id: string,
@@ -136,9 +148,11 @@ export class Opportunity {
   whoCanRW: string;
 
   @Prop({
-    owner: {type: ObjectId, ref: 'Users', default: null},
-    users: [{type: ObjectId, ref: 'Users', default: null}],
-    group: [{type: ObjectId, ref: 'Department', default: null}]
+    type: {
+      owner: {type: ObjectId, ref: 'Users', default: null},
+      users: [{type: ObjectId, ref: 'Users', default: null}],
+      group: [{type: ObjectId, ref: 'Department', default: null}]
+    }
   })
   groups: {
     owner: ObjectID,
@@ -150,8 +164,10 @@ export class Opportunity {
   sequence: number;
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   createdBy: {
     user: ObjectID,
@@ -159,8 +175,10 @@ export class Opportunity {
   };
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   editedBy: {
     user: ObjectID,
@@ -209,8 +227,10 @@ export class Opportunity {
   projectType: string;
 
   @Prop({
-    FB: {type: String, default: ''},
-    LI: {type: String, default: ''}
+    type: {
+      FB: {type: String, default: ''},
+      LI: {type: String, default: ''}
+    }
   })
   social: {
     FB: string,

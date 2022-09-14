@@ -35,6 +35,7 @@ specifiers:
   '@nrwl/workspace': 14.6.4
   '@types/jest': 28.1.1
   '@types/node': 16.11.7
+  '@types/pluralize': ^0.0.29
   '@typescript-eslint/eslint-plugin': ~5.33.1
   '@typescript-eslint/parser': ~5.33.1
   bcrypt: ^5.0.1
@@ -53,6 +54,7 @@ specifiers:
   moment: ^2.29.4
   mongoose: ^6.5.4
   nx: 14.6.4
+  pluralize: ^8.0.0
   prettier: ^2.6.2
   reflect-metadata: ^0.1.13
   rxjs: ~7.5.0
@@ -112,6 +114,7 @@ devDependencies:
   '@nrwl/workspace': 14.6.4_colkvg3hmdr6ejnhexo3p2e7uu
   '@types/jest': 28.1.1
   '@types/node': 16.11.7
+  '@types/pluralize': 0.0.29
   '@typescript-eslint/eslint-plugin': 5.33.1_m7xvcpf4u5pta577mmcxmrpwhu
   '@typescript-eslint/parser': 5.33.1_4hx5bygx4rxgd7xwyndf6ymwce
   change-case: 4.1.2
@@ -123,6 +126,7 @@ devDependencies:
   jest-environment-jsdom: 28.1.1
   jest-preset-angular: 12.2.2_xus4rvzuptti24bgjat2g5nr74
   nx: 14.6.4
+  pluralize: 8.0.0
   prettier: 2.7.1
   ts-jest: 28.0.5_rsh3pkuwbevmfi7gtx7ddom6aq
   ts-node: 10.9.1_t4lrjbt3sxauai4t5o275zsepa
@@ -4457,6 +4461,10 @@ packages:
 
   /@types/parse5/6.0.3:
     resolution: {integrity: sha512-SuT16Q1K51EAVPz1K29DJ/sXjhSQ0zjvsypYJ6tlwVsRV9jwW5Adq2ch8Dq8kDBCkYnELS7N7VNCSB5nC56t/g==}
+    dev: true
+
+  /@types/pluralize/0.0.29:
+    resolution: {integrity: sha512-BYOID+l2Aco2nBik+iYS4SZX0Lf20KPILP5RGmM1IgzdwNdTs0eebiFriOPcej1sX9mLnSoiNte5zcFxssgpGA==}
     dev: true
 
   /@types/prettier/2.7.0:

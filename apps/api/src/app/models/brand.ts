@@ -9,4 +9,4 @@ export class Brand {
   creationDate: Date;
 }
 
-export const BrandSchema = SchemaFactory.createForClass(Brand);
+export const brandSchema = SchemaFactory.createForClass(Brand);

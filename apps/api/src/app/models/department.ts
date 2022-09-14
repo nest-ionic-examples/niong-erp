@@ -21,8 +21,10 @@ export class Department {
   users: ObjectID[];
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   createdBy: {
     user: ObjectID,
@@ -30,8 +32,10 @@ export class Department {
   };
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date}
+    type: {
+      user: {type: ObjectId, ref: 'Users', default: null},
+      date: {type: Date}
+    }
   })
   editedBy: {
     user: ObjectID,
@@ -52,4 +56,4 @@ export class Department {
 
 }
 
-export const DepartmentSchema = SchemaFactory.createForClass(Department);
+export const departmentSchema = SchemaFactory.createForClass(Department);

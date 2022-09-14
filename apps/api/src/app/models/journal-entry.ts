@@ -5,7 +5,7 @@ import ObjectId = mongoose.Schema.Types.ObjectId;
 
 
 @Schema({collection: 'journalentries', discriminatorKey: '_type'})
-export class JournalEntries {
+export class JournalEntry {
   @Prop({type: Date, default: Date.now})
   date: Date;
 
@@ -19,8 +19,10 @@ export class JournalEntries {
   account: ObjectID;
 
   @Prop({
-    _id: {type: String, ref: 'currency', default: null},
-    rate: {type: Number, default: 1}
+    type: {
+      _id: {type: String, ref: 'currency', default: null},
+      rate: {type: Number, default: 1}
+    }
   })
   currency: {
     _id: string,
@@ -28,8 +30,10 @@ export class JournalEntries {
   };
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   createdBy: {
     user: ObjectID,
@@ -37,8 +41,10 @@ export class JournalEntries {
   };
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   editedBy: {
     user: ObjectID,
@@ -46,10 +52,12 @@ export class JournalEntries {
   };
 
   @Prop({
-    _id: {type: ObjectId, default: null},
-    model: {type: String, default: 'Invoice'},
-    employee: {type: ObjectId, default: null},
-    name: {type: String, default: ''}
+    type: {
+      _id: {type: ObjectId, default: null},
+      model: {type: String, default: 'Invoice'},
+      employee: {type: ObjectId, default: null},
+      name: {type: String, default: ''}
+    }
   })
   sourceDocument: {
     _id: ObjectID,
@@ -78,7 +86,7 @@ export class JournalEntries {
 
 }
 
-export const journalEntriesSchema = SchemaFactory.createForClass(JournalEntries);
+export const journalEntrySchema = SchemaFactory.createForClass(JournalEntry);
 
 
-const manualEntrySchema = SchemaFactory.createForClass(JournalEntries);
+export const manualEntrySchema = SchemaFactory.createForClass(JournalEntry);

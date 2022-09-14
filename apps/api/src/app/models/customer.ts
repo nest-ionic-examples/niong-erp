@@ -15,8 +15,10 @@ export class Customer {
   isHidden: boolean;
 
   @Prop({
-    first: {type: String, default: 'demo'},
-    last: {type: String, default: ''}
+    type: {
+      first: {type: String, default: 'demo'},
+      last: {type: String, default: ''}
+    }
   })
   name: {
     first: string,
@@ -45,11 +47,13 @@ export class Customer {
   timezone: string;
 
   @Prop({
-    street: {type: String, default: ''},
-    city: {type: String, default: ''},
-    state: {type: String, default: ''},
-    zip: {type: String, default: ''},
-    country: {type: String, default: ''}
+    type: {
+      street: {type: String, default: ''},
+      city: {type: String, default: ''},
+      state: {type: String, default: ''},
+      zip: {type: String, default: ''},
+      country: {type: String, default: ''}
+    }
   })
   address: {
     street: string,
@@ -60,12 +64,14 @@ export class Customer {
   };
 
   @Prop({
-    street: {type: String, default: ''},
-    city: {type: String, default: ''},
-    state: {type: String, default: ''},
-    zip: {type: String, default: ''},
-    country: {type: String, default: ''},
-    name: {type: String, default: ''}
+    type: {
+      street: {type: String, default: ''},
+      city: {type: String, default: ''},
+      state: {type: String, default: ''},
+      zip: {type: String, default: ''},
+      country: {type: String, default: ''},
+      name: {type: String, default: ''}
+    }
   })
   shippingAddress: {
     street: string,
@@ -86,9 +92,11 @@ export class Customer {
   skype: string;
 
   @Prop({
-    phone: {type: String, default: ''},
-    mobile: {type: String, default: ''},
-    fax: {type: String, default: ''}
+    type: {
+      phone: {type: String, default: ''},
+      mobile: {type: String, default: ''},
+      fax: {type: String, default: ''}
+    }
   })
   phones: {
     phone: string,
@@ -106,15 +114,17 @@ export class Customer {
   title: string;
 
   @Prop({
-    isCustomer: {type: Boolean, default: true},
-    isSupplier: {type: Boolean, default: false},
-    salesPerson: {type: ObjectId, ref: 'Employees', default: null},
-    salesTeam: {type: ObjectId, ref: 'Department', default: null},
-    implementedBy: {type: ObjectId, ref: 'Customers', default: null},
-    active: {type: Boolean, default: true},
-    reference: {type: String, default: ''},
-    language: {type: String, default: 'English'},
-    receiveMessages: {type: Number, default: 0}
+    type: {
+      isCustomer: {type: Boolean, default: true},
+      isSupplier: {type: Boolean, default: false},
+      salesPerson: {type: ObjectId, ref: 'Employees', default: null},
+      salesTeam: {type: ObjectId, ref: 'Department', default: null},
+      implementedBy: {type: ObjectId, ref: 'Customers', default: null},
+      active: {type: Boolean, default: true},
+      reference: {type: String, default: ''},
+      language: {type: String, default: 'English'},
+      receiveMessages: {type: Number, default: 0}
+    }
   })
   salesPurchases: {
     isCustomer: boolean,
@@ -135,8 +145,10 @@ export class Customer {
   color: string;
 
   @Prop({
-    FB: {type: String, default: ''},
-    LI: {type: String, default: ''}
+    type: {
+      FB: {type: String, default: ''},
+      LI: {type: String, default: ''}
+    }
   })
   social: {
     FB: string,
@@ -147,9 +159,11 @@ export class Customer {
   whoCanRW: string;
 
   @Prop({
-    owner: {type: ObjectId, ref: 'Users', default: null},
-    users: [{type: ObjectId, ref: 'Users', default: null}],
-    group: [{type: ObjectId, ref: 'Department', default: null}]
+    type: {
+      owner: {type: ObjectId, ref: 'Users', default: null},
+      users: [{type: ObjectId, ref: 'Users', default: null}],
+      group: [{type: ObjectId, ref: 'Department', default: null}]
+    }
   })
   groups: {
     owner: ObjectID,
@@ -187,8 +201,10 @@ export class Customer {
   history: [];
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   createdBy: {
     user: ObjectID,
@@ -196,8 +212,10 @@ export class Customer {
   };
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   editedBy: {
     user: ObjectID,
@@ -205,8 +223,10 @@ export class Customer {
   };
 
   @Prop({
-    size: String,
-    industry: {type: ObjectId, ref: 'Industries', default: null}
+    type: {
+      size: String,
+      industry: {type: ObjectId, ref: 'Industries', default: null}
+    }
   })
   companyInfo: {
     size: string,

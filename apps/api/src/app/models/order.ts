@@ -8,8 +8,10 @@ import ObjectId = mongoose.Schema.Types.ObjectId;
 @Schema({collection: 'Order', discriminatorKey: '_type'})
 export class Order {
   @Prop({
-    _id: {type: String, ref: 'currency', default: ''},
-    rate: {type: Number, default: 1} // changed default to '0' for catching errors
+    type: {
+      _id: {type: String, ref: 'currency', default: ''},
+      rate: {type: Number, default: 1} // changed default to '0' for catching errors
+    }
   })
   currency: {
     _id: string,
@@ -35,9 +37,11 @@ export class Order {
   integrationId: string;
 
   @Prop({
-    allocateStatus: {type: String, default: 'NOR', enum: ['NOR', 'NOT', 'NOA', 'ALL']},
-    fulfillStatus: {type: String, default: 'NOR', enum: ['NOR', 'NOT', 'NOA', 'ALL']},
-    shippingStatus: {type: String, default: 'NOR', enum: ['NOR', 'NOT', 'NOA', 'ALL']}
+    type: {
+      allocateStatus: {type: String, default: 'NOR', enum: ['NOR', 'NOT', 'NOA', 'ALL']},
+      fulfillStatus: {type: String, default: 'NOR', enum: ['NOR', 'NOT', 'NOA', 'ALL']},
+      shippingStatus: {type: String, default: 'NOR', enum: ['NOR', 'NOT', 'NOA', 'ALL']}
+    }
   })
   status: {
     allocateStatus: string,
@@ -67,12 +71,14 @@ export class Order {
   priceList: ObjectID;
 
   @Prop({
-    _id: false,
-    id: false,
-    total: {type: Number, default: 0},
-    discount: {type: Number, default: 0},
-    unTaxed: {type: Number, default: 0},
-    taxes: {type: Number, default: 0}
+    type: {
+      _id: false,
+      id: false,
+      total: {type: Number, default: 0},
+      discount: {type: Number, default: 0},
+      unTaxed: {type: Number, default: 0},
+      taxes: {type: Number, default: 0}
+    }
   })
   paymentInfo: {
     _id: false,
@@ -87,8 +93,10 @@ export class Order {
   shippingMethod: ObjectID;
 
   @Prop({
-    amount: {type: Number, default: 0},
-    account: {type: ObjectId, ref: 'chartOfAccount', default: null}
+    type: {
+      amount: {type: Number, default: 0},
+      account: {type: ObjectId, ref: 'chartOfAccount', default: null}
+    }
   })
   shippingExpenses: {
     amount: number,
@@ -114,9 +122,11 @@ export class Order {
   notes: [];
 
   @Prop({
-    owner: {type: ObjectId, ref: 'Users', default: null},
-    users: [{type: ObjectId, ref: 'Users', default: null}],
-    group: [{type: ObjectId, ref: 'Department', default: null}]
+    type: {
+      owner: {type: ObjectId, ref: 'Users', default: null},
+      users: [{type: ObjectId, ref: 'Users', default: null}],
+      group: [{type: ObjectId, ref: 'Department', default: null}]
+    }
   })
   groups: {
     owner: ObjectID,
@@ -131,8 +141,10 @@ export class Order {
   project: ObjectID;
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   createdBy: {
     user: ObjectID,
@@ -146,8 +158,10 @@ export class Order {
   channel: ObjectID;
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   editedBy: {
     user: ObjectID,

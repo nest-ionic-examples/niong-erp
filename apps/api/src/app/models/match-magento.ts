@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 
 @Schema({collection: 'matchMagento'})
-export class Match {
+export class MatchMagento {
   @Prop({type: String, default: ''})
   entity: string;
 
@@ -14,4 +14,4 @@ export class Match {
 
 }
 
-export const matchSchema = SchemaFactory.createForClass(Match);
+export const matchMagentoSchema = SchemaFactory.createForClass(MatchMagento);

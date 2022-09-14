@@ -10,8 +10,10 @@ import ObjectId = mongoose.Schema.Types.ObjectId;
 @Schema({collection: 'Quotation'})
 export class Quotation {
   @Prop({
-    _id: {type: String, ref: 'currency', default: null},
-    rate: {type: Number, default: 0} // changed default to '0' for catching errors
+    type: {
+      _id: {type: String, ref: 'currency', default: null},
+      rate: {type: Number, default: 0} // changed default to '0' for catching errors
+    }
   })
   currency: {
     _id: string,
@@ -61,12 +63,14 @@ export class Quotation {
   paymentTerm: ObjectID;
 
   @Prop({
-    _id: false,
-    id: false,
-    total: {type: Number, default: 0},
-    discount: {type: Number, default: 0},
-    unTaxed: {type: Number, default: 0},
-    taxes: {type: Number, default: 0}
+    type: {
+      _id: false,
+      id: false,
+      total: {type: Number, default: 0},
+      discount: {type: Number, default: 0},
+      unTaxed: {type: Number, default: 0},
+      taxes: {type: Number, default: 0}
+    }
   })
   paymentInfo: {
     _id: false,
@@ -115,9 +119,11 @@ export class Quotation {
   notes: [];
 
   @Prop({
-    owner: {type: ObjectId, ref: 'Users', default: null},
-    users: [{type: ObjectId, ref: 'Users', default: null}],
-    group: [{type: ObjectId, ref: 'Department', default: null}]
+    type: {
+      owner: {type: ObjectId, ref: 'Users', default: null},
+      users: [{type: ObjectId, ref: 'Users', default: null}],
+      group: [{type: ObjectId, ref: 'Department', default: null}]
+    }
   })
   groups: {
     owner: ObjectID,
@@ -129,8 +135,10 @@ export class Quotation {
   creationDate: Date;
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   createdBy: {
     user: ObjectID,
@@ -138,8 +146,10 @@ export class Quotation {
   };
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   editedBy: {
     user: ObjectID,

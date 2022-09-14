@@ -12,7 +12,7 @@ export class Saas {
   @Prop()
   ip: string;
 
-  @Prop()
+  @Prop({type: JSON})
   geo: JSON;
 
   @Prop({type: String, default: 'localhost'})
@@ -73,4 +73,4 @@ export class Saas {
 
 }
 
-export const SaasSchema = SchemaFactory.createForClass(Saas);
+export const saasSchema = SchemaFactory.createForClass(Saas);

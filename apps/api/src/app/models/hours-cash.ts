@@ -6,8 +6,8 @@ export class HoursCash {
   @Prop({type: String, default: ''})
   dateField: string;
 
-  @Prop()
-  result: JSON;
+  @Prop({type: JSON})
+  result: object;
 
 }
 

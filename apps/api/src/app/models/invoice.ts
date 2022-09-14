@@ -40,8 +40,10 @@ export class Base {
   journal: ObjectID;
 
   @Prop({
-    _id: {type: String, ref: 'currency', default: ''},
-    rate: {type: Number, default: 1}
+    type: {
+      _id: {type: String, ref: 'currency', default: ''},
+      rate: {type: Number, default: 1}
+    }
   })
   currency: {
     _id: string,
@@ -58,12 +60,14 @@ export class Base {
   paymentMethod: ObjectID;
 
   @Prop({
-    _id: false,
-    total: {type: Number, default: 0},
-    balance: {type: Number, default: 0},
-    unTaxed: {type: Number, default: 0},
-    discount: {type: Number, default: 0},
-    taxes: {type: Number, default: 0}
+    type: {
+      _id: false,
+      total: {type: Number, default: 0},
+      balance: {type: Number, default: 0},
+      unTaxed: {type: Number, default: 0},
+      discount: {type: Number, default: 0},
+      taxes: {type: Number, default: 0}
+    }
   })
   paymentInfo: {
     _id: false,
@@ -84,9 +88,11 @@ export class Base {
   whoCanRW: string;
 
   @Prop({
-    owner: {type: ObjectId, ref: 'Users', default: null},
-    users: [{type: ObjectId, ref: 'Users', default: null}],
-    group: [{type: ObjectId, ref: 'Department', default: null}]
+    type: {
+      owner: {type: ObjectId, ref: 'Users', default: null},
+      users: [{type: ObjectId, ref: 'Users', default: null}],
+      group: [{type: ObjectId, ref: 'Department', default: null}]
+    }
   })
   groups: {
     owner: ObjectID,
@@ -98,8 +104,10 @@ export class Base {
   creationDate: Date;
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   createdBy: {
     user: ObjectID,
@@ -107,8 +115,10 @@ export class Base {
   };
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   editedBy: {
     user: ObjectID,

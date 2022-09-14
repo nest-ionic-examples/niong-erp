@@ -24,8 +24,10 @@ export class CustomDashboard {
   publicAccess: boolean;
 
   @Prop({
-    date: {type: Date, default: Date.now},
-    user: {type: ObjectId, ref: 'Users', default: null}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   createdBy: {
     date: Date,
@@ -33,8 +35,10 @@ export class CustomDashboard {
   };
 
   @Prop({
-    date: {type: Date, default: Date.now},
-    user: {type: ObjectId, ref: 'Users', default: null}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   editedBy: {
     date: Date,
@@ -46,4 +50,4 @@ export class CustomDashboard {
 
 }
 
-export const CustomDashboardSchema = SchemaFactory.createForClass(CustomDashboard);
+export const customDashboardSchema = SchemaFactory.createForClass(CustomDashboard);

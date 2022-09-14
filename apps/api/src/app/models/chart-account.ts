@@ -27,8 +27,10 @@ export class ChartAccount {
   payMethod: ObjectID;
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date}
+    type: {
+      user: {type: ObjectId, ref: 'Users', default: null},
+      date: {type: Date}
+    }
   })
   editedBy: {
     user: ObjectID,
@@ -36,8 +38,10 @@ export class ChartAccount {
   };
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      user: {type: ObjectId, ref: 'Users', default: null},
+      date: {type: Date, default: Date.now}
+    }
   })
   createdBy: {
     user: ObjectID,

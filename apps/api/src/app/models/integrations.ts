@@ -30,8 +30,10 @@ export class Integrations {
   baseUrl: string;
 
   @Prop({
-    warehouse: {type: ObjectId, default: null, ref: 'warehouse'},
-    location: {type: ObjectId, default: null, ref: 'location'}
+    type: {
+      warehouse: {type: ObjectId, default: null, ref: 'warehouse'},
+      location: {type: ObjectId, default: null, ref: 'location'}
+    }
   })
   warehouseSettings: {
     warehouse: ObjectID,
@@ -66,8 +68,10 @@ export class Integrations {
   bankAccount: ObjectID;
 
   @Prop({
-    _id: {type: Number, default: 0},
-    name: {type: String, default: ''}
+    type: {
+      _id: {type: Number, default: 0},
+      name: {type: String, default: ''}
+    }
   })
   shippingMethod: {
     _id: number,
@@ -91,7 +95,7 @@ export class Integrations {
 
 }
 
-export const IntegrationsSchema = SchemaFactory.createForClass(Integrations);
+export const integrationsSchema = SchemaFactory.createForClass(Integrations);
 
 
-IntegrationsSchema.index({baseUrl: 1, channelName: 1}, {unique: true});
+integrationsSchema.index({baseUrl: 1, channelName: 1}, {unique: true});

@@ -8,4 +8,4 @@ export class Language {
 
 }
 
-export const LanguageSchema = SchemaFactory.createForClass(Language);
+export const languageSchema = SchemaFactory.createForClass(Language);

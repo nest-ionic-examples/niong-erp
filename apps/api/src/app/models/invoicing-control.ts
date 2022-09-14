@@ -8,4 +8,4 @@ export class InvoicingControl {
 
 }
 
-export const InvoicingControlSchema = SchemaFactory.createForClass(InvoicingControl);
+export const invoicingControlSchema = SchemaFactory.createForClass(InvoicingControl);

@@ -10,8 +10,10 @@ export class Salary {
   ID: number;
 
   @Prop({
-    _id: {type: ObjectId, ref: 'Employees', default: null},
-    name: String
+    type: {
+      _id: {type: ObjectId, ref: 'Employees', default: null},
+      name: String
+    }
   })
   employee: {
     _id: ObjectID,
@@ -28,9 +30,11 @@ export class Salary {
   baseSalary: number;
 
   @Prop({
-    salary: Number,
-    onCash: Number,
-    onCard: Number
+    type: {
+      salary: Number,
+      onCash: Number,
+      onCard: Number
+    }
   })
   calc: {
     salary: number,
@@ -39,8 +43,10 @@ export class Salary {
   };
 
   @Prop({
-    onCash: Number,
-    onCard: Number
+    type: {
+      onCash: Number,
+      onCard: Number
+    }
   })
   paid: {
     onCash: number,
@@ -48,9 +54,11 @@ export class Salary {
   };
 
   @Prop({
-    onCash: Number,
-    onCard: Number,
-    total: Number
+    type: {
+      onCash: Number,
+      onCard: Number,
+      total: Number
+    }
   })
   diff: {
     onCash: number,

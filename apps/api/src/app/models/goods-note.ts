@@ -32,8 +32,10 @@ export class GoodsNote {
   date: Date;
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   createdBy: {
     user: ObjectID,
@@ -44,8 +46,10 @@ export class GoodsNote {
   description: string;
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   editedBy: {
     user: ObjectID,
@@ -98,18 +102,20 @@ export const goodsNoteSchema = SchemaFactory.createForClass(GoodsNote);
 @Schema()
 export class GoodsOutNote extends GoodsNote {
   @Prop({
-    shipped: Boolean,
-    picked: Boolean,
-    packed: Boolean,
-    printed: Boolean,
-    shippedOn: Date,
-    pickedOn: Date,
-    packedOn: Date,
-    printedOn: Date,
-    pickedById: {type: ObjectId, ref: 'Users', default: null},
-    packedById: {type: ObjectId, ref: 'Users', default: null},
-    shippedById: {type: ObjectId, ref: 'Users', default: null},
-    printedById: {type: ObjectId, ref: 'Users', default: null},
+    type: {
+      shipped: Boolean,
+      picked: Boolean,
+      packed: Boolean,
+      printed: Boolean,
+      shippedOn: Date,
+      pickedOn: Date,
+      packedOn: Date,
+      printedOn: Date,
+      pickedById: {type: ObjectId, ref: 'Users', default: null},
+      packedById: {type: ObjectId, ref: 'Users', default: null},
+      shippedById: {type: ObjectId, ref: 'Users', default: null},
+      printedById: {type: ObjectId, ref: 'Users', default: null},
+    }
   })
   status: {
     shipped: boolean,
@@ -137,9 +143,11 @@ export const goodsOutNoteSchema = SchemaFactory.createForClass(GoodsOutNote);
 @Schema()
 export class GoodsInNote extends GoodsNote {
   @Prop({
-    received: Boolean,
-    receivedOn: Date,
-    receivedById: {type: ObjectId, ref: 'Users', default: null}
+    type: {
+      received: Boolean,
+      receivedOn: Date,
+      receivedById: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   status: {
     received: boolean,
@@ -190,9 +198,11 @@ export const stockCorrectionSchema = SchemaFactory.createForClass(StockCorrectio
 @Schema()
 export class StockReturn extends GoodsInNote {
   @Prop({
-    received: Boolean,
-    receivedOn: Date,
-    receivedById: {type: ObjectId, ref: 'Users', default: null}
+    type: {
+      received: Boolean,
+      receivedOn: Date,
+      receivedById: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   status: {
     received: boolean,
@@ -236,18 +246,20 @@ export class StockTransactions extends GoodsInNote {
   warehouseTo: ObjectID;
 
   @Prop({
-    shipped: Boolean,
-    received: Boolean,
-    packed: Boolean,
-    printed: Boolean,
-    shippedOn: Date,
-    receivedOn: Date,
-    packedOn: Date,
-    printedOn: Date,
-    receivedById: {type: ObjectId, ref: 'Users', default: null},
-    packedById: {type: ObjectId, ref: 'Users', default: null},
-    shippedById: {type: ObjectId, ref: 'Users', default: null},
-    printedById: {type: ObjectId, ref: 'Users', default: null}
+    type: {
+      shipped: Boolean,
+      received: Boolean,
+      packed: Boolean,
+      printed: Boolean,
+      shippedOn: Date,
+      receivedOn: Date,
+      packedOn: Date,
+      printedOn: Date,
+      receivedById: {type: ObjectId, ref: 'Users', default: null},
+      packedById: {type: ObjectId, ref: 'Users', default: null},
+      shippedById: {type: ObjectId, ref: 'Users', default: null},
+      printedById: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   status: {
     shipped: boolean,

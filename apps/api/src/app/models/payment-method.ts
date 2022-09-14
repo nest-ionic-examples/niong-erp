@@ -34,4 +34,4 @@ export class PaymentMethod {
 
 }
 
-export const PaymentMethodSchema = SchemaFactory.createForClass(PaymentMethod);
+export const paymentMethodSchema = SchemaFactory.createForClass(PaymentMethod);

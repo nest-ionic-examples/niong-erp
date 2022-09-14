@@ -8,4 +8,4 @@ export class Destination {
 
 }
 
-export const DestinationSchema = SchemaFactory.createForClass(Destination);
+export const destinationSchema = SchemaFactory.createForClass(Destination);

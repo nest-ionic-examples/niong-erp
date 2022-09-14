@@ -1,5 +1,5 @@
 import { Controller } from '@nestjs/common';
-import { ReadController } from './core/read.controller';
+import { ReadController } from '../base-controllers/read.controller';
 import { InjectModel } from '@nestjs/mongoose';
 import { BonusType } from '../models/bonus-type';
 import { ApiTags } from '@nestjs/swagger';

@@ -32,8 +32,10 @@ export class Routing {
   steps: Steps[];
 
   @Prop({
-    date: {type: Date, default: Date.now},
-    user: {type: ObjectId, ref: 'Users', default: null}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   createdBy: {
     date: Date,
@@ -41,8 +43,10 @@ export class Routing {
   };
 
   @Prop({
-    date: {type: Date, default: Date.now},
-    user: {type: ObjectId, ref: 'Users', default: null}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   editedBy: {
     date: Date,

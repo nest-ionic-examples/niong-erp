@@ -24,9 +24,11 @@ export class Project {
   whoCanRW: string;
 
   @Prop({
-    owner: {type: ObjectId, ref: 'Users', default: null},
-    users: [{type: ObjectId, ref: 'Users', default: null}],
-    group: [{type: ObjectId, ref: 'Department', default: null}]
+    type: {
+      owner: {type: ObjectId, ref: 'Users', default: null},
+      users: [{type: ObjectId, ref: 'Users', default: null}],
+      group: [{type: ObjectId, ref: 'Department', default: null}]
+    }
   })
   groups: {
     owner: ObjectID,
@@ -65,8 +67,10 @@ export class Project {
   progress: number;
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   createdBy: {
     user: ObjectID,
@@ -89,8 +93,10 @@ export class Project {
   attachments: [];
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date}
+    type: {
+      user: {type: ObjectId, ref: 'Users', default: null},
+      date: {type: Date}
+    }
   })
   editedBy: {
     user: ObjectID,
@@ -133,9 +139,11 @@ export class Project {
   }[];
 
   @Prop({
-    _id: false,
-    bonus: Array,
-    projectTeam: [{type: ObjectId, ref: 'jobs', default: null}]
+    type: {
+      _id: false,
+      bonus: Array,
+      projectTeam: [{type: ObjectId, ref: 'jobs', default: null}]
+    }
   })
   budget: {
     _id: false,

@@ -33,4 +33,4 @@ export class Profile {
 
 }
 
-export const ProfileSchema = SchemaFactory.createForClass(Profile);
+export const profileSchema = SchemaFactory.createForClass(Profile);

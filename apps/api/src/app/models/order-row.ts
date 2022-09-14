@@ -62,4 +62,4 @@ export class OrderRow {
 
 }
 
-export const OrderRowSchema = SchemaFactory.createForClass(OrderRow);
+export const orderRowSchema = SchemaFactory.createForClass(OrderRow);

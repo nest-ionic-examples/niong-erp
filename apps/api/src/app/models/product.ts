@@ -43,16 +43,18 @@ export class Product {
   name: string;
 
   @Prop({
-    productType: {type: ObjectId, ref: 'productTypes', default: null},
-    isActive: {type: Boolean, default: true},
-    barcode: {type: String, default: ''},
-    description: {type: String, default: ''},
-    brand: {type: ObjectId, ref: 'Brand', default: null},
-    categories: [{type: ObjectId, ref: 'ProductCategory'}],
-    SKU: {type: String, default: null},
-    UPC: {type: String, default: null},
-    ISBN: {type: String, default: null},
-    EAN: {type: String, default: null}
+    type: {
+      productType: {type: ObjectId, ref: 'productTypes', default: null},
+      isActive: {type: Boolean, default: true},
+      barcode: {type: String, default: ''},
+      description: {type: String, default: ''},
+      brand: {type: ObjectId, ref: 'Brand', default: null},
+      categories: [{type: ObjectId, ref: 'ProductCategory'}],
+      SKU: {type: String, default: null},
+      UPC: {type: String, default: null},
+      ISBN: {type: String, default: null},
+      EAN: {type: String, default: null}
+    }
   })
   info: {
     productType: ObjectID,
@@ -68,17 +70,19 @@ export class Product {
   };
 
   @Prop({
-    weight: {type: Number, default: 0},
+    type: {
+      weight: {type: Number, default: 0},
 
-    size: {
-      length: {type: Number, default: 0},
-      width: {type: Number, default: 0},
-      height: {type: Number, default: 0},
-      dimension: {type: String, default: 'cm'}
-    },
+      size: {
+        length: {type: Number, default: 0},
+        width: {type: Number, default: 0},
+        height: {type: Number, default: 0},
+        dimension: {type: String, default: 'cm'}
+      },
 
-    warehouseMsg: {type: String, default: ''},
-    minStockLevel: {type: Number, default: 0}
+      warehouseMsg: {type: String, default: ''},
+      minStockLevel: {type: Number, default: 0}
+    }
   })
   inventory: {
     weight: number,
@@ -111,9 +115,11 @@ export class Product {
   whoCanRW: string;
 
   @Prop({
-    owner: {type: ObjectId, ref: 'Users', default: null},
-    users: [{type: ObjectId, ref: 'Users', default: null}],
-    group: [{type: ObjectId, ref: 'Department', default: null}]
+    type: {
+      owner: {type: ObjectId, ref: 'Users', default: null},
+      users: [{type: ObjectId, ref: 'Users', default: null}],
+      group: [{type: ObjectId, ref: 'Department', default: null}]
+    }
   })
   groups: {
     owner: ObjectID,
@@ -125,8 +131,10 @@ export class Product {
   creationDate: Date;
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   createdBy: {
     user: ObjectID,
@@ -134,8 +142,10 @@ export class Product {
   };
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   editedBy: {
     user: ObjectID,

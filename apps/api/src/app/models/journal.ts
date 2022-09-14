@@ -18,7 +18,9 @@ export class Journal {
   transaction: string;
 
   @Prop({
-    name: {type: String, default: 'USD'}
+    type: {
+      name: {type: String, default: 'USD'}
+    }
   })
   currency: {
     name: string
@@ -28,8 +30,10 @@ export class Journal {
   description: string;
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   createdBy: {
     user: ObjectID,
@@ -37,8 +41,10 @@ export class Journal {
   };
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date}
+    type: {
+      user: {type: ObjectId, ref: 'Users', default: null},
+      date: {type: Date}
+    }
   })
   editedBy: {
     user: ObjectID,
@@ -53,4 +59,4 @@ export class Journal {
 
 }
 
-export const JournalSchema = SchemaFactory.createForClass(Journal);
+export const journalSchema = SchemaFactory.createForClass(Journal);

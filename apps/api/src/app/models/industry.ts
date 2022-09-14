@@ -11,4 +11,4 @@ export class Industry {
 
 }
 
-export const IndustrySchema = SchemaFactory.createForClass(Industry);
+export const industrySchema = SchemaFactory.createForClass(Industry);

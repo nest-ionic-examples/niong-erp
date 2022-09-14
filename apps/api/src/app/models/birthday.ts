@@ -22,4 +22,4 @@ export class Birthday {
   };
 }
 
-export const birthdaysSchema = SchemaFactory.createForClass(Birthday);
+export const birthdaySchema = SchemaFactory.createForClass(Birthday);

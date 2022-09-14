@@ -11,4 +11,4 @@ export class DeliverTo {
 
 }
 
-export const DeliverToSchema = SchemaFactory.createForClass(DeliverTo);
+export const deliverToSchema = SchemaFactory.createForClass(DeliverTo);

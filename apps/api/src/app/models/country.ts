@@ -14,4 +14,4 @@ export class Country {
 
 }
 
-export const countriesSchema = SchemaFactory.createForClass(Country);
+export const countrySchema = SchemaFactory.createForClass(Country);

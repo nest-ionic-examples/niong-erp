@@ -43,8 +43,10 @@ export class BasePayment {
   year: number;
 
   @Prop({
-    _id: {type: String, ref: 'currency', default: ''},
-    rate: {type: Number, default: 1}
+    type: {
+      _id: {type: String, ref: 'currency', default: ''},
+      rate: {type: Number, default: 1}
+    }
   })
   currency: {
     _id: string,
@@ -52,9 +54,11 @@ export class BasePayment {
   };
 
   @Prop({
-    owner: {type: ObjectId, ref: 'Users', default: null},
-    users: [{type: ObjectId, ref: 'Users', default: null}],
-    group: [{type: ObjectId, ref: 'Department', default: null}]
+    type: {
+      owner: {type: ObjectId, ref: 'Users', default: null},
+      users: [{type: ObjectId, ref: 'Users', default: null}],
+      group: [{type: ObjectId, ref: 'Department', default: null}]
+    }
   })
   groups: {
     owner: ObjectID,
@@ -63,8 +67,10 @@ export class BasePayment {
   };
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   createdBy: {
     user: ObjectID,
@@ -72,8 +78,10 @@ export class BasePayment {
   };
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   editedBy: {
     user: ObjectID,
@@ -90,8 +98,10 @@ export class BasePayment {
   bankAccount: ObjectID;
 
   @Prop({
-    amount: {type: Number, default: 0, set: setPrice},
-    account: {type: ObjectId, ref: 'chartOfAccount', default: null}
+    type: {
+      amount: {type: Number, default: 0, set: setPrice},
+      account: {type: ObjectId, ref: 'chartOfAccount', default: null}
+    }
   })
   bankExpenses: {
     amount: number,
@@ -99,8 +109,10 @@ export class BasePayment {
   };
 
   @Prop({
-    amount: {type: Number, default: 0, set: setPrice},
-    account: {type: ObjectId, ref: 'chartOfAccount', default: null}
+    type: {
+      amount: {type: Number, default: 0, set: setPrice},
+      account: {type: ObjectId, ref: 'chartOfAccount', default: null}
+    }
   })
   overPayment: {
     amount: number,
@@ -108,8 +120,10 @@ export class BasePayment {
   };
 
   @Prop({
-    amount: {type: Number, default: 0, set: setPrice},
-    account: {type: ObjectId, ref: 'chartOfAccount', default: null}
+    type: {
+      amount: {type: Number, default: 0, set: setPrice},
+      account: {type: ObjectId, ref: 'chartOfAccount', default: null}
+    }
   })
   otherIncomeLoss: {
     amount: number,
@@ -154,8 +168,10 @@ export class Payment extends BasePayment {
   order: ObjectID;
 
   @Prop({
-    _id: {type: String, ref: 'currency', default: null},
-    rate: {type: Number, default: 1}
+    type: {
+      _id: {type: String, ref: 'currency', default: null},
+      rate: {type: Number, default: 1}
+    }
   })
   currency: {
     _id: string,
@@ -176,7 +192,7 @@ export class Payment extends BasePayment {
 
 }
 
-export const PaymentSchema = SchemaFactory.createForClass(Payment);
+export const paymentSchema = SchemaFactory.createForClass(Payment);
 
 
 @Schema()
@@ -302,7 +318,7 @@ function setName(this: Document & BasePayment, next) {
   });
 }
 
-PaymentSchema.pre('save', setName);
+paymentSchema.pre('save', setName);
 PrepaymentSchema.pre('save', setName);
 ProformaPaymentSchema.pre('save', setName);
 InvoicePaymentSchema.pre('save', setName);

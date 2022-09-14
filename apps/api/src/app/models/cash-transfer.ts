@@ -25,8 +25,10 @@ export class CashTransfer {
   creditAccount: ObjectID;
 
   @Prop({
-    _id: {type: String, ref: 'currency', default: null},
-    rate: {type: Number, default: 1}
+    type: {
+      _id: {type: String, ref: 'currency', default: null},
+      rate: {type: Number, default: 1}
+    }
   })
   currency: {
     _id: string,

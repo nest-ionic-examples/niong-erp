@@ -4,7 +4,7 @@ import * as mongoose from 'mongoose';
 import ObjectId = mongoose.Schema.Types.ObjectId;
 
 @Schema({collection: 'Tasks'})
-export class Tasks {
+export class Task {
   @Prop({type: String, required: true})
   summary: string;
 
@@ -60,8 +60,10 @@ export class Tasks {
   progress: number;
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   createdBy: {
     user: ObjectID,
@@ -75,8 +77,10 @@ export class Tasks {
   attachments: [];
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   editedBy: {
     user: ObjectID,
@@ -88,4 +92,4 @@ export class Tasks {
 
 }
 
-export const tasksSchema = SchemaFactory.createForClass(Tasks);
+export const taskSchema = SchemaFactory.createForClass(Task);

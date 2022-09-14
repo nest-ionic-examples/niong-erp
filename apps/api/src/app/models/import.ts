@@ -12,8 +12,8 @@ export class Import {
   @Prop({type: Date, default: Date.now})
   date: Date;
 
-  @Prop()
-  result: JSON;
+  @Prop({type: JSON})
+  result: object;
 
   @Prop({type: String, default: ''})
   filePath: string;

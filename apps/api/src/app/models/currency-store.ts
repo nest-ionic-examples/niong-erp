@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 
 @Schema({collection: 'CurrencyStore'})
-export class Currency {
+export class CurrencyStore {
   @Prop()
   data: [];
 
@@ -11,4 +11,4 @@ export class Currency {
 
 }
 
-export const currencySchema = SchemaFactory.createForClass(Currency);
+export const currencyStoreSchema = SchemaFactory.createForClass(CurrencyStore);

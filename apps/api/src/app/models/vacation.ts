@@ -15,7 +15,7 @@ export class Vacation {
   @Prop({type: ObjectId, ref: 'Department', default: null})
   department: ObjectID;
 
-  @Prop()
+  @Prop({type: Object})
   vacations: object;
 
   @Prop()

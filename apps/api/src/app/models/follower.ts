@@ -19,8 +19,10 @@ export class Follower {
   collectionName: string;
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   createdBy: {
     user: ObjectID,
@@ -28,8 +30,10 @@ export class Follower {
   };
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   editedBy: {
     user: ObjectID,
@@ -38,4 +42,4 @@ export class Follower {
 
 }
 
-export const FollowerSchema = SchemaFactory.createForClass(Follower);
+export const followerSchema = SchemaFactory.createForClass(Follower);

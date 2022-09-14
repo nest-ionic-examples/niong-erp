@@ -46,4 +46,4 @@ export class CustomChart {
 
 }
 
-export const CustomChartSchema = SchemaFactory.createForClass(CustomChart);
+export const customChartSchema = SchemaFactory.createForClass(CustomChart);

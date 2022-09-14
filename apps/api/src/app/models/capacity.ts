@@ -9,8 +9,10 @@ export class Capacity {
   ID: number;
 
   @Prop({
-    _id: {type: ObjectId, ref: 'Employees', default: null},
-    name: String
+    type: {
+      _id: {type: ObjectId, ref: 'Employees', default: null},
+      name: String
+    }
   })
   employee: {
     _id: ObjectID,
@@ -18,8 +20,10 @@ export class Capacity {
   };
 
   @Prop({
-    _id: {type: ObjectId, ref: 'Department', default: null},
-    name: String
+    type: {
+      _id: {type: ObjectId, ref: 'Department', default: null},
+      name: String
+    }
   })
   department: {
     _id: ObjectID,

@@ -9,11 +9,13 @@ export class Warehouse {
   name: string;
 
   @Prop({
-    street: {type: String, default: ''},
-    city: {type: String, default: ''},
-    state: {type: String, default: ''},
-    zip: {type: String, default: ''},
-    country: {type: String, default: ''}
+    type: {
+      street: {type: String, default: ''},
+      city: {type: String, default: ''},
+      state: {type: String, default: ''},
+      zip: {type: String, default: ''},
+      country: {type: String, default: ''}
+    }
   })
   address: {
     street: string,
@@ -30,8 +32,10 @@ export class Warehouse {
   main: boolean;
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   createdBy: {
     user: ObjectID,
@@ -39,8 +43,10 @@ export class Warehouse {
   };
 
   @Prop({
-    user: {type: ObjectId, ref: 'Users', default: null},
-    date: {type: Date, default: Date.now}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   editedBy: {
     user: ObjectID,

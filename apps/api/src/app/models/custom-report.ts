@@ -18,8 +18,10 @@ export class CustomReport {
   publicAccess: boolean;
 
   @Prop({
-    date: {type: Date, default: Date.now},
-    user: {type: ObjectId, ref: 'Users', default: null}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   createdBy: {
     date: Date,
@@ -27,8 +29,10 @@ export class CustomReport {
   };
 
   @Prop({
-    date: {type: Date, default: Date.now},
-    user: {type: ObjectId, ref: 'Users', default: null}
+    type: {
+      date: {type: Date, default: Date.now},
+      user: {type: ObjectId, ref: 'Users', default: null}
+    }
   })
   editedBy: {
     date: Date,
@@ -36,8 +40,10 @@ export class CustomReport {
   };
 
   @Prop({
-    from: {type: Date, default: Date.now},
-    to: {type: Date, default: Date.now}
+    type: {
+      from: {type: Date, default: Date.now},
+      to: {type: Date, default: Date.now}
+    }
   })
   dateRange: {
     from: Date,
@@ -60,4 +66,4 @@ export class CustomReport {
 
 }
 
-export const CustomReportsSchema = SchemaFactory.createForClass(CustomReport);
+export const customReportSchema = SchemaFactory.createForClass(CustomReport);

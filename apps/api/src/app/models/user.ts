@@ -32,8 +32,10 @@ export class User {
   company: string;
 
   @Prop({
-    first: {type: String, default: ''},
-    last: {type: String, default: ''}
+    type: {
+      first: {type: String, default: ''},
+      last: {type: String, default: ''}
+    }
   })
   contactName: {
     first: string,
@@ -41,23 +43,29 @@ export class User {
   };
 
   @Prop({
-    userId: {type: String, default: ''}
+    type: {
+      userId: {type: String, default: ''}
+    }
   })
   facebook: {
     userId: string
   };
 
   @Prop({
-    userId: {type: String, default: ''}
+    type: {
+      userId: {type: String, default: ''}
+    }
   })
   google: {
     userId: string
   };
 
   @Prop({
-    userId: {type: String, default: ''},
-    country: {type: String, default: ''},
-    profileUrl: {type: String, default: ''}
+    type: {
+      userId: {type: String, default: ''},
+      country: {type: String, default: ''},
+      profileUrl: {type: String, default: ''}
+    }
   })
   linkedin: {
     userId: string,
@@ -66,9 +74,11 @@ export class User {
   };
 
   @Prop({
-    refresh_token: {type: String, default: ''},
-    access_token: {type: String, default: ''},
-    verify_token: {type: String, default: ''}
+    type: {
+      refresh_token: {type: String, default: ''},
+      access_token: {type: String, default: ''},
+      verify_token: {type: String, default: ''}
+    }
   })
   credentials: {
     refresh_token: string,
@@ -84,19 +94,21 @@ export class User {
 
   /** Setting for `kanban` viewType */
   @Prop({
-    opportunities: {
-      countPerPage: {type: Number, default: 10},
-      foldWorkflows: [{type: String, default: ''}]
-    },
+    type: {
+      opportunities: {
+        countPerPage: {type: Number, default: 10},
+        foldWorkflows: [{type: String, default: ''}]
+      },
 
-    applications: {
-      countPerPage: {type: Number, default: 10},
-      foldWorkflows: [{type: String, default: ''}]
-    },
+      applications: {
+        countPerPage: {type: Number, default: 10},
+        foldWorkflows: [{type: String, default: ''}]
+      },
 
-    tasks: {
-      countPerPage: {type: Number, default: 10},
-      foldWorkflows: [{type: String, default: ''}]
+      tasks: {
+        countPerPage: {type: Number, default: 10},
+        foldWorkflows: [{type: String, default: ''}]
+      }
     }
   })
   kanbanSettings: {
@@ -129,8 +141,10 @@ export class User {
   }[];
 
   @Prop({
-    reports: [{type: ObjectId, ref: 'CustomReport', default: null}],
-    dashboards: [{type: ObjectId, ref: 'CustomDashboard', default: null}]
+    type: {
+      reports: [{type: ObjectId, ref: 'CustomReport', default: null}],
+      dashboards: [{type: ObjectId, ref: 'CustomDashboard', default: null}]
+    }
   })
   favorite: {
     reports: ObjectID[],
@@ -163,8 +177,8 @@ export class User {
     filePath: string,
     timeStamp: number,
     stage: number,
-    map: {type: JSON},
-    unMap: {type: JSON},
+    map: { type: JSON },
+    unMap: { type: JSON },
     type: string,
     comparingField: string,
     delimiter: string,

@@ -11,4 +11,4 @@ export class PaymentTerm {
 
 }
 
-export const PaymentTermSchema = SchemaFactory.createForClass(PaymentTerm);
+export const paymentTermSchema = SchemaFactory.createForClass(PaymentTerm);
