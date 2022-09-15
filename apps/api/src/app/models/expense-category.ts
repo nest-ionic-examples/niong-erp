@@ -17,13 +17,13 @@ export class ExpenseCategory {
   @Prop([{type: ObjectId, default: null}])
   child: ObjectID[];
 
-  @Prop([{type: ObjectId, ref: 'Users', default: null}])
+  @Prop([{type: ObjectId, ref: 'User', default: null}])
   users: ObjectID[];
 
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   createdBy: {
@@ -34,7 +34,7 @@ export class ExpenseCategory {
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   editedBy: {
@@ -42,7 +42,7 @@ export class ExpenseCategory {
     date: Date
   };
 
-  @Prop({type: ObjectId, ref: 'chartOfAccount', default: null})
+  @Prop({type: ObjectId, ref: 'ChartOfAccount', default: null})
   account: ObjectID;
 
   @Prop({type: Number, default: 0})

@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ObjectID } from 'bson';
 import * as mongoose from 'mongoose';
 import ObjectId = mongoose.Schema.Types.ObjectId;
+import { User } from './user';
 
 @Schema({collection: 'accountsCategories'})
 export class AccountCategory {
@@ -11,34 +12,34 @@ export class AccountCategory {
   @Prop({type: String, default: 'All'})
   fullName: string;
 
-  @Prop({type: ObjectId, ref: 'accountsCategories', default: null})
-  parent: ObjectID;
+  @Prop({type: ObjectId, ref: 'AccountCategory', default: null})
+  parent: string | ObjectID | AccountCategory;
 
   @Prop([{type: ObjectId, default: null}])
-  child: ObjectID[];
+  child: (string | ObjectID | AccountCategory)[];
 
-  @Prop([{type: ObjectId, ref: 'Users', default: null}])
+  @Prop([{type: ObjectId, ref: 'User', default: null}])
   users: ObjectID[];
 
   @Prop({
     type: {
-      user: {type: ObjectId, ref: 'Users', default: null},
+      user: {type: ObjectId, ref: 'User', default: null},
       date: {type: Date, default: Date.now}
     }
   })
   createdBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 
   @Prop({
     type: {
-      user: {type: ObjectId, ref: 'Users', default: null},
+      user: {type: ObjectId, ref: 'User', default: null},
       date: {type: Date, default: Date.now}
     }
   })
   editedBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 

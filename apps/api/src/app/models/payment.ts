@@ -4,6 +4,17 @@ import * as mongoose from 'mongoose';
 import { Document } from 'mongoose';
 import { Invoice } from './invoice';
 import ObjectId = mongoose.Schema.Types.ObjectId;
+import { User } from './user';
+import { Department } from './department';
+import { ChartOfAccount } from './chart-of-account';
+import { Integration } from './integration';
+import { Customer } from './customer';
+import { PaymentMethod } from './payment-method';
+import { Destination } from './destination';
+import { Order } from './order';
+import { ProductCategory } from './product-category';
+import { PayRoll } from './pay-roll';
+import { Employee } from './employee';
 
 
 function setPrice(num) {
@@ -16,7 +27,7 @@ export class BasePayment {
   ID: number;
 
   @Prop({type: ObjectId, ref: 'Invoice', default: null})
-  invoice: ObjectID | Invoice;
+  invoice: string | ObjectID | Invoice;
 
   @Prop({type: Number, default: 0, set: setPrice})
   paidAmount: number;
@@ -44,7 +55,7 @@ export class BasePayment {
 
   @Prop({
     type: {
-      _id: {type: String, ref: 'currency', default: ''},
+      _id: {type: String, ref: 'Currency', default: ''},
       rate: {type: Number, default: 1}
     }
   })
@@ -55,52 +66,52 @@ export class BasePayment {
 
   @Prop({
     type: {
-      owner: {type: ObjectId, ref: 'Users', default: null},
-      users: [{type: ObjectId, ref: 'Users', default: null}],
+      owner: {type: ObjectId, ref: 'User', default: null},
+      users: [{type: ObjectId, ref: 'User', default: null}],
       group: [{type: ObjectId, ref: 'Department', default: null}]
     }
   })
   groups: {
-    owner: ObjectID,
-    users: ObjectID[],
-    group: ObjectID[]
+    owner: string | ObjectID | User,
+    users: (string | ObjectID | User)[],
+    group: (string | ObjectID | Department)[]
   };
 
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   createdBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   editedBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 
   @Prop({type: ObjectId, ref: 'journal', default: null})
   journal: ObjectID;
 
-  @Prop({type: ObjectId, ref: 'chartOfAccount', default: null})
+  @Prop({type: ObjectId, ref: 'ChartOfAccount', default: null})
   otherIncomeLossAccount: ObjectID;
 
-  @Prop({type: ObjectId, ref: 'chartOfAccount', default: null})
+  @Prop({type: ObjectId, ref: 'ChartOfAccount', default: null})
   bankAccount: ObjectID;
 
   @Prop({
     type: {
       amount: {type: Number, default: 0, set: setPrice},
-      account: {type: ObjectId, ref: 'chartOfAccount', default: null}
+      account: {type: ObjectId, ref: 'ChartOfAccount', default: null}
     }
   })
   bankExpenses: {
@@ -111,27 +122,27 @@ export class BasePayment {
   @Prop({
     type: {
       amount: {type: Number, default: 0, set: setPrice},
-      account: {type: ObjectId, ref: 'chartOfAccount', default: null}
+      account: {type: ObjectId, ref: 'ChartOfAccount', default: null}
     }
   })
   overPayment: {
     amount: number,
-    account: ObjectID
+    account: string | ObjectID | ChartOfAccount
   };
 
   @Prop({
     type: {
       amount: {type: Number, default: 0, set: setPrice},
-      account: {type: ObjectId, ref: 'chartOfAccount', default: null}
+      account: {type: ObjectId, ref: 'ChartOfAccount', default: null}
     }
   })
   otherIncomeLoss: {
     amount: number,
-    account: ObjectID
+    account: string | ObjectID | ChartOfAccount
   };
 
-  @Prop({type: ObjectId, default: null, ref: 'integrations'})
-  channel: ObjectID;
+  @Prop({type: ObjectId, default: null, ref: 'Integration'})
+  channel: string | ObjectID | Integration;
 
   @Prop({type: String, default: ''})
   integrationId: string;
@@ -144,7 +155,7 @@ export const basePaymentSchema = SchemaFactory.createForClass(BasePayment);
 @Schema()
 export class Payment extends BasePayment {
   @Prop({type: ObjectId, ref: 'Invoice', default: null})
-  invoice: ObjectID;
+  invoice: string | ObjectID | Invoice;
 
   @Prop({type: Boolean, default: true})
   forSale: boolean;
@@ -152,24 +163,24 @@ export class Payment extends BasePayment {
   @Prop({type: String, default: ''})
   paymentRef: string;
 
-  @Prop({type: ObjectId, ref: 'Customers', default: null})
-  supplier: ObjectID;
+  @Prop({type: ObjectId, ref: 'Customer', default: null})
+  supplier: string | ObjectID | Customer;
 
   @Prop({type: ObjectId, ref: 'PaymentMethod', default: null})
-  paymentMethod: ObjectID;
+  paymentMethod: string | ObjectID | PaymentMethod;
 
   @Prop({type: ObjectId, ref: 'Destination', default: null})
-  period: ObjectID;
+  period: string | ObjectID | Destination;
 
   @Prop({type: Boolean})
   bonus: boolean;
 
   @Prop({type: ObjectId, ref: 'Order', default: null})
-  order: ObjectID;
+  order: string | ObjectID | Order;
 
   @Prop({
     type: {
-      _id: {type: String, ref: 'currency', default: null},
+      _id: {type: String, ref: 'Currency', default: null},
       rate: {type: Number, default: 1}
     }
   })
@@ -178,7 +189,7 @@ export class Payment extends BasePayment {
     rate: number
   };
 
-  @Prop({type: ObjectId, ref: 'integrations', default: null})
+  @Prop({type: ObjectId, ref: 'Integration', default: null})
   channel: ObjectID;
 
   @Prop({type: String, default: null})
@@ -188,7 +199,7 @@ export class Payment extends BasePayment {
   refund: boolean;
 
   @Prop({type: ObjectId, ref: 'Payment', default: null})
-  refundId: ObjectID;
+  refundId: string | ObjectID | Payment;
 
 }
 
@@ -248,7 +259,7 @@ export class SalaryPayment extends BasePayment {
   isExpense: boolean;
 
   @Prop([{
-    _id: {type: ObjectId, ref: 'Employees', default: null},
+    _id: {type: ObjectId, ref: 'Employee', default: null},
     name: {type: Object, default: null},
     paidAmount: Number,
     differenceAmount: {type: Number, default: 0, set: setPrice}
@@ -261,10 +272,10 @@ export class SalaryPayment extends BasePayment {
   }[];
 
   @Prop({type: ObjectId, ref: 'ProductCategory', default: null})
-  paymentMethod: ObjectID;
+  paymentMethod: string | ObjectID | ProductCategory;
 
   @Prop([{type: ObjectId, ref: 'PayRoll', default: null}])
-  paymentRef: ObjectID[];
+  paymentRef: (string | ObjectID | PayRoll)[];
 
   @Prop({type: Date, default: null})
   period: Date;
@@ -279,11 +290,11 @@ export class PayOut extends BasePayment {
   @Prop({type: Boolean, default: false})
   forSale: boolean;
 
-  @Prop({type: ObjectId, ref: 'Employees', default: null})
-  supplier: ObjectID;
+  @Prop({type: ObjectId, ref: 'Employee', default: null})
+  supplier: string | ObjectID | Employee;
 
   @Prop({type: ObjectId, ref: 'PaymentMethod', default: null})
-  paymentMethod: ObjectID;
+  paymentMethod: string | ObjectID | PaymentMethod;
 
   @Prop({type: String, default: ''})
   paymentRef: string;

@@ -3,6 +3,8 @@ import { ObjectID } from 'bson';
 import * as mongoose from 'mongoose';
 import { Document } from 'mongoose';
 import ObjectId = mongoose.Schema.Types.ObjectId;
+import { ChartOfAccount } from './chart-of-account';
+import { Currency } from './currency';
 
 @Schema({collection: 'cashTransfer'})
 export class CashTransfer {
@@ -18,20 +20,20 @@ export class CashTransfer {
   @Prop({type: Number, default: 0})
   amount: number;
 
-  @Prop({type: ObjectId, ref: 'chartOfAccount', default: null})
-  debitAccount: ObjectID;
+  @Prop({type: ObjectId, ref: 'ChartOfAccount', default: null})
+  debitAccount: string | ObjectID | ChartOfAccount;
 
-  @Prop({type: ObjectId, ref: 'chartOfAccount', default: null})
-  creditAccount: ObjectID;
+  @Prop({type: ObjectId, ref: 'ChartOfAccount', default: null})
+  creditAccount: string | ObjectID | ChartOfAccount;
 
   @Prop({
     type: {
-      _id: {type: String, ref: 'currency', default: null},
+      _id: {type: String, ref: 'Currency', default: null},
       rate: {type: Number, default: 1}
     }
   })
   currency: {
-    _id: string,
+    _id: string | Currency,
     rate: number
   };
 

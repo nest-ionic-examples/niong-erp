@@ -72,7 +72,7 @@ export class Employee {
   @Prop({type: String, default: ''})
   officeLocation: string;
 
-  @Prop({type: ObjectId, ref: 'Users', default: null})
+  @Prop({type: ObjectId, ref: 'User', default: null})
   relatedUser: ObjectID;
 
   @Prop({type: String, default: 'Public'})
@@ -93,10 +93,10 @@ export class Employee {
   @Prop({type: ObjectId, ref: 'scheduledPay', default: null})
   scheduledPay: ObjectID;
 
-  @Prop({type: ObjectId, ref: 'Employees', default: null})
+  @Prop({type: ObjectId, ref: 'Employee', default: null})
   manager: ObjectID;
 
-  @Prop({type: ObjectId, ref: 'Employees', default: null})
+  @Prop({type: ObjectId, ref: 'Employee', default: null})
   coach: ObjectID;
 
   @Prop({type: ObjectId, default: null})
@@ -149,7 +149,7 @@ export class Employee {
   @Prop({type: String, default: ''})
   referredBy: string;
 
-  @Prop({type: ObjectId, ref: 'workflows', default: null})
+  @Prop({type: ObjectId, ref: 'Workflow', default: null})
   workflow: ObjectID;
 
   @Prop({type: String, enum: ['owner', 'group', 'everyOne'], default: 'everyOne'})
@@ -157,8 +157,8 @@ export class Employee {
 
   @Prop({
     type: {
-      owner: {type: ObjectId, ref: 'Users', default: null},
-      users: [{type: ObjectId, ref: 'Users', default: null}],
+      owner: {type: ObjectId, ref: 'User', default: null},
+      users: [{type: ObjectId, ref: 'User', default: null}],
       group: [{type: ObjectId, ref: 'Department', default: null}]
     }
   })
@@ -186,7 +186,7 @@ export class Employee {
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   createdBy: {
@@ -197,7 +197,7 @@ export class Employee {
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   editedBy: {

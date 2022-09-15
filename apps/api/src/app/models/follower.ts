@@ -9,7 +9,7 @@ export class Follower {
   @Prop({type: Date, default: Date.now})
   date: Date;
 
-  @Prop({type: ObjectId, ref: 'Users', default: null})
+  @Prop({type: ObjectId, ref: 'User', default: null})
   followerId: ObjectID;
 
   @Prop({type: ObjectId, default: null})
@@ -21,7 +21,7 @@ export class Follower {
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   createdBy: {
@@ -32,7 +32,7 @@ export class Follower {
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   editedBy: {

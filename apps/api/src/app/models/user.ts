@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ObjectID } from 'bson';
 import * as mongoose from 'mongoose';
 import ObjectId = mongoose.Schema.Types.ObjectId;
+import { Employee } from './employee';
 
 @Schema({collection: 'Users'})
 export class User {
@@ -155,8 +156,8 @@ export class User {
   ID: number;
 
   /** Related employee for current user */
-  @Prop({type: ObjectId, ref: 'Employees', default: null})
-  relatedEmployee: ObjectID;
+  @Prop({type: ObjectId, ref: 'Employee', default: null})
+  relatedEmployee: string | ObjectID | Employee;
 
   @Prop({
     fileName: {type: String, default: ''},

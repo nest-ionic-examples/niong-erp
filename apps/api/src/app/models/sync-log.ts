@@ -2,6 +2,8 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ObjectID } from 'bson';
 import * as mongoose from 'mongoose';
 import ObjectId = mongoose.Schema.Types.ObjectId;
+import { Integration } from './integration';
+import { User } from './user';
 
 
 @Schema()
@@ -53,11 +55,11 @@ export const errorSchema = SchemaFactory.createForClass(Error);
 
 @Schema({collection: 'syncLogs'})
 export class SyncLog {
-  @Prop({type: ObjectId, ref: 'integrations', default: null})
-  channel: ObjectID;
+  @Prop({type: ObjectId, ref: 'Integration', default: null})
+  channel: string | ObjectID | Integration;
 
-  @Prop({type: ObjectId, ref: 'Users', default: null})
-  user: ObjectID;
+  @Prop({type: ObjectId, ref: 'User', default: null})
+  user: string | ObjectID | User;
 
   @Prop({type: Date, default: Date.now})
   date: Date;

@@ -2,6 +2,9 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ObjectID } from 'bson';
 import * as mongoose from 'mongoose';
 import ObjectId = mongoose.Schema.Types.ObjectId;
+import { Employee } from './employee';
+import { Vacation } from './vacation';
+import { Department } from './department';
 
 @Schema({collection: 'Capacity'})
 export class Capacity {
@@ -10,12 +13,12 @@ export class Capacity {
 
   @Prop({
     type: {
-      _id: {type: ObjectId, ref: 'Employees', default: null},
+      _id: {type: ObjectId, ref: 'Employee', default: null},
       name: String
     }
   })
   employee: {
-    _id: ObjectID,
+    _id: string | ObjectID | Employee,
     name: string
   };
 
@@ -26,12 +29,12 @@ export class Capacity {
     }
   })
   department: {
-    _id: ObjectID,
+    _id: string | ObjectID | Department,
     name: string
   };
 
   @Prop({type: ObjectId, ref: 'Vacation', default: null})
-  vacation: ObjectID;
+  vacation: string | ObjectID | Vacation;
 
   @Prop()
   month: number;

@@ -1,6 +1,14 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ObjectID } from 'bson';
 import * as mongoose from 'mongoose';
+import { Task } from './task';
+import { Customer } from './customer';
+import { User } from './user';
+import { Department } from './department';
+import { PaymentTerm } from './payment-term';
+import { Employee } from './employee';
+import { BonusType } from './bonus-type';
+import { Job } from './job';
 import ObjectId = mongoose.Schema.Types.ObjectId;
 
 @Schema({collection: 'Project'})
@@ -11,11 +19,11 @@ export class Project {
   @Prop({type: String, default: 'emptyProject', unique: true})
   name: string;
 
-  @Prop([{type: ObjectId, ref: 'Tasks', default: null}])
-  task: ObjectID[];
+  @Prop([{type: ObjectId, ref: 'Task', default: null}])
+  task: (string | ObjectID | Task)[];
 
-  @Prop({type: ObjectId, ref: 'Customers', default: null})
-  customer: ObjectID;
+  @Prop({type: ObjectId, ref: 'Customer', default: null})
+  customer: string | ObjectID | Customer;
 
   @Prop()
   description: string;
@@ -25,15 +33,15 @@ export class Project {
 
   @Prop({
     type: {
-      owner: {type: ObjectId, ref: 'Users', default: null},
-      users: [{type: ObjectId, ref: 'Users', default: null}],
+      owner: {type: ObjectId, ref: 'User', default: null},
+      users: [{type: ObjectId, ref: 'User', default: null}],
       group: [{type: ObjectId, ref: 'Department', default: null}]
     }
   })
   groups: {
-    owner: ObjectID,
-    users: ObjectID[],
-    group: ObjectID[]
+    owner: string | ObjectID | User,
+    users: (string | ObjectID | User)[],
+    group: (string | ObjectID | Department)[]
   };
 
   @Prop()
@@ -51,7 +59,7 @@ export class Project {
   @Prop({type: String, default: null})
   parent: string;
 
-  @Prop({type: ObjectId, ref: 'workflows', default: null})
+  @Prop({type: ObjectId, ref: 'Workflow', default: null})
   workflow: ObjectID;
 
   @Prop({type: Number, default: 0})
@@ -69,11 +77,11 @@ export class Project {
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   createdBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 
@@ -81,7 +89,7 @@ export class Project {
   projecttype: string;
 
   @Prop({type: ObjectId, ref: 'PaymentTerm', default: null})
-  paymentTerms: ObjectID;
+  paymentTerms: string | ObjectID | PaymentTerm;
 
   @Prop({type: ObjectId, ref: 'PaymentMethod', default: null})
   paymentMethod: ObjectID;
@@ -94,12 +102,12 @@ export class Project {
 
   @Prop({
     type: {
-      user: {type: ObjectId, ref: 'Users', default: null},
+      user: {type: ObjectId, ref: 'User', default: null},
       date: {type: Date}
     }
   })
   editedBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 
@@ -110,16 +118,8 @@ export class Project {
   ID: number;
 
   @Prop([{
-    employeeId: {
-      type: ObjectId,
-      ref: 'Employees'
-    },
-
-    bonusId: {
-      type: ObjectId,
-      ref: 'bonusType'
-    },
-
+    employeeId: {type: ObjectId, ref: 'Employee'},
+    bonusId: {type: ObjectId, ref: 'bonusType'},
     startDate: {type: Date, default: null},
     startWeek: Number,
     startYear: Number,
@@ -128,8 +128,8 @@ export class Project {
     endYear: Number
   }])
   bonus: {
-    employeeId: ObjectID,
-    bonusId: ObjectID,
+    employeeId: string | ObjectID | Employee,
+    bonusId: string | ObjectID | BonusType,
     startDate: Date,
     startWeek: number,
     startYear: number,
@@ -142,13 +142,13 @@ export class Project {
     type: {
       _id: false,
       bonus: Array,
-      projectTeam: [{type: ObjectId, ref: 'jobs', default: null}]
+      projectTeam: [{type: ObjectId, ref: 'Job', default: null}]
     }
   })
   budget: {
     _id: false,
     bonus: [],
-    projectTeam: ObjectID[]
+    projectTeam: (string | ObjectID | Job)[]
   };
 
 }

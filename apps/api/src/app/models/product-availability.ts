@@ -2,20 +2,25 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ObjectID } from 'bson';
 import * as mongoose from 'mongoose';
 import ObjectId = mongoose.Schema.Types.ObjectId;
+import { Product } from './product';
+import { Warehouse } from './warehouse';
+import { Location } from './location';
+import { GoodsInNote, GoodsNote } from './goods-note';
+import { OrderRow } from './order-row';
 
 @Schema({collection: 'productsAvailability'})
 export class ProductAvailability {
   @Prop({type: ObjectId, ref: 'Product', default: null})
-  product: ObjectID;
+  product: string | ObjectID | Product;
 
-  @Prop({type: ObjectId, ref: 'warehouse', default: null})
-  warehouse: ObjectID;
+  @Prop({type: ObjectId, ref: 'Warehouse', default: null})
+  warehouse: string | ObjectID | Warehouse;
 
-  @Prop({type: ObjectId, ref: 'location', default: null})
-  location: ObjectID;
+  @Prop({type: ObjectId, ref: 'Location', default: null})
+  location: string | ObjectID | Location;
 
-  @Prop({type: ObjectId, ref: 'goodsInNotes', default: null})
-  goodsInNote: ObjectID;
+  @Prop({type: ObjectId, ref: 'GoodsInNote', default: null})
+  goodsInNote: string | ObjectID | GoodsInNote;
 
   @Prop({type: Number, default: 0})
   cost: number;
@@ -24,11 +29,11 @@ export class ProductAvailability {
   onHand: number;
 
   @Prop([{
-    goodsNoteId: {type: ObjectId, ref: 'goodsOutNotes', default: null},
+    goodsNoteId: {type: ObjectId, ref: 'GoodsOutNote', default: null},
     quantity: {type: Number, default: 0}
   }])
   goodsOutNotes: {
-    goodsNoteId: ObjectID,
+    goodsNoteId: string | ObjectID | GoodsNote,
     quantity: number
   }[];
 
@@ -36,11 +41,11 @@ export class ProductAvailability {
   isJob: boolean;
 
   @Prop([{
-    orderRowId: {type: ObjectId, ref: 'orderRows', default: null},
+    orderRowId: {type: ObjectId, ref: 'OrderRow', default: null},
     quantity: {type: Number, default: 0}
   }])
   orderRows: {
-    orderRowId: ObjectID,
+    orderRowId: string | ObjectID | OrderRow,
     quantity: number
   }[];
 

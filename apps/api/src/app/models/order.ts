@@ -4,12 +4,26 @@ import * as mongoose from 'mongoose';
 import { Document } from 'mongoose';
 import { Quotation } from './quotation';
 import ObjectId = mongoose.Schema.Types.ObjectId;
+import { Customer } from './customer';
+import { PackageMetadata } from '@angular/cli/src/utilities/package-metadata';
+import { Destination } from './destination';
+import { PaymentTerm } from './payment-term';
+import { Employee } from './employee';
+import { PriceList } from './price-list';
+import { ChartOfAccount } from './chart-of-account';
+import { ShippingMethod } from './shipping-method';
+import { Workflow } from './workflow';
+import { Warehouse } from './warehouse';
+import { User } from './user';
+import { Department } from './department';
+import { Project } from './project';
+import { Integration } from './integration';
 
 @Schema({collection: 'Order', discriminatorKey: '_type'})
 export class Order {
   @Prop({
     type: {
-      _id: {type: String, ref: 'currency', default: ''},
+      _id: {type: String, ref: 'Currency', default: ''},
       rate: {type: Number, default: 1} // changed default to '0' for catching errors
     }
   })
@@ -24,8 +38,8 @@ export class Order {
   @Prop({type: String, default: 'Not Ordered', enum: ['Not Ordered', 'Not Invoiced', 'Invoiced']})
   type: string;
 
-  @Prop({type: ObjectId, ref: 'Customers', default: null})
-  supplier: ObjectID;
+  @Prop({type: ObjectId, ref: 'Customer', default: null})
+  supplier: string | ObjectID | Customer;
 
   @Prop({type: Date, default: Date.now})
   orderDate: Date;
@@ -50,25 +64,25 @@ export class Order {
   };
 
   @Prop({type: ObjectId, ref: 'PaymentMethod', default: null})
-  paymentMethod: ObjectID;
+  paymentMethod: string | ObjectID | PackageMetadata;
 
   @Prop({type: String, default: 'SO', unique: true})
   name: string;
 
   @Prop({type: ObjectId, ref: 'Destination', default: null})
-  destination: ObjectID;
+  destination: string | ObjectID | Destination;
 
   @Prop({type: ObjectId, ref: 'PaymentTerm', default: null})
-  paymentTerm: ObjectID;
+  paymentTerm: string | ObjectID | PaymentTerm;
 
-  @Prop({type: ObjectId, ref: 'Employees', default: null})
-  salesPerson: ObjectID;
-
-  @Prop({type: ObjectId, ref: 'PriceList', default: null})
-  costList: ObjectID;
+  @Prop({type: ObjectId, ref: 'Employee', default: null})
+  salesPerson: string | ObjectID | Employee;
 
   @Prop({type: ObjectId, ref: 'PriceList', default: null})
-  priceList: ObjectID;
+  costList: string | ObjectID | PriceList;
+
+  @Prop({type: ObjectId, ref: 'PriceList', default: null})
+  priceList: string | ObjectID | PriceList;
 
   @Prop({
     type: {
@@ -89,28 +103,28 @@ export class Order {
     taxes: number
   };
 
-  @Prop({type: ObjectId, ref: 'shippingMethod', default: null})
-  shippingMethod: ObjectID;
+  @Prop({type: ObjectId, ref: 'ShippingMethod', default: null})
+  shippingMethod: string | ObjectID | ShippingMethod;
 
   @Prop({
     type: {
       amount: {type: Number, default: 0},
-      account: {type: ObjectId, ref: 'chartOfAccount', default: null}
+      account: {type: ObjectId, ref: 'ChartOfAccount', default: null}
     }
   })
   shippingExpenses: {
     amount: number,
-    account: ObjectID
+    account: string | ObjectID | ChartOfAccount
   };
 
-  @Prop({type: ObjectId, ref: 'workflows', default: null})
-  workflow: ObjectID;
+  @Prop({type: ObjectId, ref: 'Workflow', default: null})
+  workflow: string | ObjectID | Workflow;
 
-  @Prop({type: ObjectId, ref: 'workflows', default: null})
-  tempWorkflow: ObjectID;
+  @Prop({type: ObjectId, ref: 'Workflow', default: null})
+  tempWorkflow: string | ObjectID | Workflow;
 
-  @Prop({type: ObjectId, ref: 'warehouse', default: null})
-  warehouse: ObjectID;
+  @Prop({type: ObjectId, ref: 'Warehouse', default: null})
+  warehouse: string | ObjectID | Warehouse;
 
   @Prop({type: String, enum: ['owner', 'group', 'everyOne'], default: 'everyOne'})
   whoCanRW: string;
@@ -123,48 +137,48 @@ export class Order {
 
   @Prop({
     type: {
-      owner: {type: ObjectId, ref: 'Users', default: null},
-      users: [{type: ObjectId, ref: 'Users', default: null}],
+      owner: {type: ObjectId, ref: 'User', default: null},
+      users: [{type: ObjectId, ref: 'User', default: null}],
       group: [{type: ObjectId, ref: 'Department', default: null}]
     }
   })
   groups: {
-    owner: ObjectID,
-    users: ObjectID[],
-    group: ObjectID[]
+    owner: string | ObjectID | User,
+    users: (string | ObjectID | User)[],
+    group: (string | ObjectID | Department)[]
   };
 
   @Prop({type: Date, default: Date.now})
   creationDate: Date;
 
   @Prop({type: ObjectId, ref: 'Project', default: null})
-  project: ObjectID;
+  project: string | ObjectID | Project;
 
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   createdBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 
   @Prop()
   externalId: string;
 
-  @Prop({type: ObjectId, ref: 'integrations', default: null})
-  channel: ObjectID;
+  @Prop({type: ObjectId, ref: 'Integration', default: null})
+  channel: string | ObjectID | Integration;
 
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   editedBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 

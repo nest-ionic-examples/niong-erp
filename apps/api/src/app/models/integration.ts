@@ -4,7 +4,7 @@ import * as mongoose from 'mongoose';
 import ObjectId = mongoose.Schema.Types.ObjectId;
 
 @Schema({collection: 'integrations'})
-export class Integrations {
+export class Integration {
   @Prop({type: Date, default: new Date(0)})
   ordersDate: Date;
 
@@ -95,7 +95,7 @@ export class Integrations {
 
 }
 
-export const integrationsSchema = SchemaFactory.createForClass(Integrations);
+export const integrationsSchema = SchemaFactory.createForClass(Integration);
 
 
 integrationsSchema.index({baseUrl: 1, channelName: 1}, {unique: true});

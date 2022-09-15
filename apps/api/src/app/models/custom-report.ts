@@ -20,7 +20,7 @@ export class CustomReport {
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   createdBy: {
@@ -31,12 +31,12 @@ export class CustomReport {
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   editedBy: {
-    date: Date,
-    user: ObjectID
+    user: string | ObjectID | User,
+    date: Date
   };
 
   @Prop({

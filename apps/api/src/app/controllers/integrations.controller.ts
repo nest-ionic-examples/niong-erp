@@ -1,11 +1,12 @@
 import { Controller } from '@nestjs/common';
 import { ReadController } from '../base-controllers/read.controller';
 import { InjectModel } from '@nestjs/mongoose';
-import { Integrations } from '../models/integrations';
+import { Integration } from '../models/integration';
 import { ApiTags } from '@nestjs/swagger';
+import { Model } from 'mongoose';
 
 @ApiTags('Integrations')
 @Controller('integrations')
-export class IntegrationsController extends ReadController<Integrations> {
-  constructor(@InjectModel(Integrations.name) model) { super(model); }
+export class IntegrationsController extends ReadController<Integration> {
+  constructor(@InjectModel(Integration.name) model: Model<Integration>) { super(model); }
 }

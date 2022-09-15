@@ -2,6 +2,10 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ObjectID } from 'bson';
 import * as mongoose from 'mongoose';
 import ObjectId = mongoose.Schema.Types.ObjectId;
+import { User } from './user';
+import { Product } from './product';
+import { Integration } from './integration';
+import { ChartOfAccount } from './chart-of-account';
 
 @Schema({collection: 'ProductCategories'})
 export class ProductCategory {
@@ -12,38 +16,38 @@ export class ProductCategory {
   fullName: string;
 
   @Prop({type: ObjectId, ref: 'ProductCategory', default: null})
-  parent: ObjectID;
+  parent: string | ObjectID | ProductCategory;
 
   @Prop([{type: ObjectId, default: null}])
   child: ObjectID[];
 
-  @Prop([{type: ObjectId, ref: 'Users', default: null}])
-  users: ObjectID[];
+  @Prop([{type: ObjectId, ref: 'User', default: null}])
+  users: (string | ObjectID | User)[];
 
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   createdBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   editedBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 
-  @Prop({type: ObjectId, ref: 'integrations', default: null})
-  channel: ObjectID;
+  @Prop({type: ObjectId, ref: 'Integration', default: null})
+  channel: string | ObjectID | Integration;
 
   @Prop({type: String, default: ''})
   integrationId: string;
@@ -57,23 +61,23 @@ export class ProductCategory {
   @Prop({type: Boolean, default: false})
   main: boolean;
 
-  @Prop({type: ObjectId, ref: 'chartOfAccount', default: null})
-  taxesAccount: ObjectID;
+  @Prop({type: ObjectId, ref: 'ChartOfAccount', default: null})
+  taxesAccount: string | ObjectID | ChartOfAccount;
 
-  @Prop({type: ObjectId, ref: 'chartOfAccount', default: null})
-  debitAccount: ObjectID;
+  @Prop({type: ObjectId, ref: 'ChartOfAccount', default: null})
+  debitAccount: string | ObjectID | ChartOfAccount;
 
-  @Prop({type: ObjectId, ref: 'chartOfAccount', default: null})
-  creditAccount: ObjectID;
+  @Prop({type: ObjectId, ref: 'ChartOfAccount', default: null})
+  creditAccount: string | ObjectID | ChartOfAccount;
 
-  @Prop({type: ObjectId, ref: 'chartOfAccount', default: null})
-  bankExpensesAccount: ObjectID;
+  @Prop({type: ObjectId, ref: 'ChartOfAccount', default: null})
+  bankExpensesAccount: string | ObjectID | ChartOfAccount;
 
-  @Prop({type: ObjectId, ref: 'chartOfAccount', default: null})
-  otherIncome: ObjectID;
+  @Prop({type: ObjectId, ref: 'ChartOfAccount', default: null})
+  otherIncome: string | ObjectID | ChartOfAccount;
 
-  @Prop({type: ObjectId, ref: 'chartOfAccount', default: null})
-  otherLoss: ObjectID;
+  @Prop({type: ObjectId, ref: 'ChartOfAccount', default: null})
+  otherLoss: string | ObjectID | ChartOfAccount;
 
 }
 

@@ -1,7 +1,16 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ObjectID } from 'bson';
 import * as mongoose from 'mongoose';
+import { Job } from './job';
+import { Image } from './image';
+import { ProductType } from './product-type';
 import ObjectId = mongoose.Schema.Types.ObjectId;
+import { Brand } from './brand';
+import { ProductCategory } from './product-category';
+import { ProductOptionValue } from './product-option-value';
+import { Workflow } from './workflow';
+import { User } from './user';
+import { Department } from './department';
 
 @Schema({collection: 'Products'})
 export class Product {
@@ -14,8 +23,8 @@ export class Product {
   @Prop({type: String, default: null})
   groupId: string;
 
-  @Prop({type: ObjectId, ref: 'jobs', default: null})
-  job: ObjectID;
+  @Prop({type: ObjectId, ref: 'Job', default: null})
+  job: string | ObjectID | Job;
 
   @Prop({type: Boolean, default: true})
   canBeSold: boolean;
@@ -29,22 +38,22 @@ export class Product {
   @Prop({type: Boolean, default: true})
   canBePurchased: boolean;
 
-  @Prop({type: ObjectId, ref: 'ProductImages', default: null})
-  sourceDocument: ObjectID;
+  @Prop({type: ObjectId, ref: 'ProductImage', default: null})
+  sourceDocument: string | ObjectID;
 
   @Prop({
     type: ObjectId,
-    ref: 'Images',
+    ref: 'Image',
     default: null
   })
-  imageSrc: ObjectID;
+  imageSrc: string | ObjectID | Image;
 
   @Prop({type: String, default: ''})
   name: string;
 
   @Prop({
     type: {
-      productType: {type: ObjectId, ref: 'productTypes', default: null},
+      productType: {type: ObjectId, ref: 'ProductType', default: null},
       isActive: {type: Boolean, default: true},
       barcode: {type: String, default: ''},
       description: {type: String, default: ''},
@@ -57,12 +66,12 @@ export class Product {
     }
   })
   info: {
-    productType: ObjectID,
+    productType: string | ObjectID | ProductType,
     isActive: boolean,
     barcode: string,
     description: string,
-    brand: ObjectID,
-    categories: ObjectID[],
+    brand: string | ObjectID | Brand,
+    categories: (string | ObjectID | ProductCategory)[],
     SKU: string,
     UPC: string,
     ISBN: string,
@@ -96,8 +105,8 @@ export class Product {
     minStockLevel: number
   };
 
-  @Prop([{type: ObjectId, ref: 'ProductOptionsValues', default: null}])
-  variants: ObjectID[];
+  @Prop([{type: ObjectId, ref: 'ProductOptionValue', default: null}])
+  variants: (string | ObjectID | ProductOptionValue)[];
 
   @Prop([{
     _id: {type: ObjectId},
@@ -108,23 +117,23 @@ export class Product {
     quantity: number
   }[];
 
-  @Prop({type: ObjectId, ref: 'workflows', default: null})
-  workflow: ObjectID;
+  @Prop({type: ObjectId, ref: 'Workflow', default: null})
+  workflow: string | ObjectID | Workflow;
 
   @Prop({type: String, enum: ['owner', 'group', 'everyOne'], default: 'everyOne'})
   whoCanRW: string;
 
   @Prop({
     type: {
-      owner: {type: ObjectId, ref: 'Users', default: null},
-      users: [{type: ObjectId, ref: 'Users', default: null}],
+      owner: {type: ObjectId, ref: 'User', default: null},
+      users: [{type: ObjectId, ref: 'User', default: null}],
       group: [{type: ObjectId, ref: 'Department', default: null}]
     }
   })
   groups: {
-    owner: ObjectID,
-    users: ObjectID[],
-    group: ObjectID[]
+    owner: string | ObjectID | User,
+    users: (string | ObjectID | User)[],
+    group: (string | ObjectID | Department)[]
   };
 
   @Prop({type: Date, default: Date.now})
@@ -133,22 +142,22 @@ export class Product {
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   createdBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   editedBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 

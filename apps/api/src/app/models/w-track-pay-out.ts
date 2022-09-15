@@ -2,6 +2,9 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ObjectID } from 'bson';
 import * as mongoose from 'mongoose';
 import ObjectId = mongoose.Schema.Types.ObjectId;
+import { User } from './user';
+import { Department } from './department';
+import { Employee } from './employee';
 
 
 function setPrice(num) {
@@ -18,12 +21,12 @@ export class WTrackPayOut {
 
   @Prop({
     type: {
-      _id: {type: ObjectId, ref: 'Employees', default: null},
+      _id: {type: ObjectId, ref: 'Employee', default: null},
       fullName: String
     }
   })
   supplier: {
-    _id: ObjectID,
+    _id: string | ObjectID | Employee,
     fullName: string
   };
 
@@ -59,36 +62,36 @@ export class WTrackPayOut {
 
   @Prop({
     type: {
-      owner: {type: ObjectId, ref: 'Users', default: null},
-      users: [{type: ObjectId, ref: 'Users', default: null}],
+      owner: {type: ObjectId, ref: 'User', default: null},
+      users: [{type: ObjectId, ref: 'User', default: null}],
       group: [{type: ObjectId, ref: 'Department', default: null}]
     }
   })
   groups: {
-    owner: ObjectID,
-    users: ObjectID[],
-    group: ObjectID[]
+    owner: string | ObjectID | User,
+    users: (string | ObjectID | User)[],
+    group: string | ObjectID | Department[]
   };
 
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   createdBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   editedBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 

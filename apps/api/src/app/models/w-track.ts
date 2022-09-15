@@ -2,6 +2,11 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ObjectID } from 'bson';
 import * as mongoose from 'mongoose';
 import ObjectId = mongoose.Schema.Types.ObjectId;
+import { Department } from './department';
+import { Employee } from './employee';
+import { Project } from './project';
+import { Job } from './job';
+import { User } from './user';
 
 
 function setPrice(num) {
@@ -20,13 +25,13 @@ export class WTrack {
   dateByMonth: number;
 
   @Prop({type: ObjectId, ref: 'Project', default: null})
-  project: ObjectID;
+  project: string | ObjectID | Project;
 
-  @Prop({type: ObjectId, ref: 'Employees', default: null})
-  employee: ObjectID;
+  @Prop({type: ObjectId, ref: 'Employee', default: null})
+  employee: string | ObjectID | Employee;
 
   @Prop({type: ObjectId, ref: 'Department', default: null})
-  department: ObjectID;
+  department: string | ObjectID | Department;
 
   @Prop()
   year: number;
@@ -104,41 +109,41 @@ export class WTrack {
 
   @Prop({
     type: {
-      owner: {type: ObjectId, ref: 'Users', default: null},
-      users: [{type: ObjectId, ref: 'Users', default: null}],
+      owner: {type: ObjectId, ref: 'User', default: null},
+      users: [{type: ObjectId, ref: 'User', default: null}],
       group: [{type: ObjectId, ref: 'Department', default: null}]
     }
   })
   groups: {
-    owner: ObjectID,
-    users: ObjectID[],
-    group: ObjectID[]
+    owner: string | ObjectID | User,
+    users: (string | ObjectID | User)[],
+    group: string | ObjectID | Department[]
   };
 
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   editedBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   createdBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 
-  @Prop({type: ObjectId, ref: 'jobs', default: null})
-  jobs: ObjectID;
+  @Prop({type: ObjectId, ref: 'Job', default: null})
+  jobs: string | ObjectID | Job;
 
 }
 

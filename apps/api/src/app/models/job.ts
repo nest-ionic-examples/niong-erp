@@ -3,9 +3,17 @@ import { ObjectID } from 'bson';
 import * as mongoose from 'mongoose';
 import { Document } from 'mongoose';
 import ObjectId = mongoose.Schema.Types.ObjectId;
+import { Workflow } from './workflow';
+import { WTrack } from './w-track';
+import { Project } from './project';
+import { Quotation } from './quotation';
+import { Order } from './order';
+import { Invoice, Invoices } from './invoice';
+import { User } from './user';
+import { Warehouse } from './warehouse';
 
 @Schema({collection: 'jobs'})
-export class Jobs {
+export class Job {
   @Prop({type: String, default: ''})
   name: string;
 
@@ -15,65 +23,65 @@ export class Jobs {
   @Prop({type: String, default: ''})
   description: string;
 
-  @Prop({type: ObjectId, ref: 'workflows', default: null})
-  workflow: ObjectID;
+  @Prop({type: ObjectId, ref: 'Workflow', default: null})
+  workflow: string | ObjectID | Workflow;
 
   @Prop({
     type: String,
     enum: ['Not Ordered', 'Ordered', 'Invoiced'],
     default: 'Not Ordered'
   })
-  type: string;
+  type: 'Not Ordered' | 'Ordered' | 'Invoiced';
 
-  @Prop([{type: ObjectId, ref: 'wTrack', default: null}])
-  wTracks: ObjectID[];
+  @Prop([{type: ObjectId, ref: 'WTrack', default: null}])
+  wTracks: (string | ObjectID | WTrack)[];
 
   @Prop({type: ObjectId, ref: 'Project', default: null})
-  project: ObjectID;
+  project: string | ObjectID | Project;
 
   @Prop({type: ObjectId, ref: 'Quotation', default: null})
-  quotation: ObjectID;
+  quotation: string | ObjectID | Quotation;
 
   @Prop({type: ObjectId, ref: 'Order', default: null})
-  order: ObjectID;
+  order: string | ObjectID | Order;
 
   @Prop({type: ObjectId, ref: 'Invoice', default: null})
-  invoice: ObjectID;
+  invoice: string | ObjectID | Invoice;
 
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   editedBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   createdBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 
   @Prop({type: Boolean, default: true})
   reconcile: boolean;
 
-  @Prop({type: ObjectId, ref: 'warehouse', default: null})
-  warehouse: ObjectID;
+  @Prop({type: ObjectId, ref: 'Warehouse', default: null})
+  warehouse: string | ObjectID | Warehouse;
 
 }
 
-export const jobsSchema = SchemaFactory.createForClass(Jobs);
+export const jobsSchema = SchemaFactory.createForClass(Job);
 
 
-jobsSchema.pre('save', function (this: Document & Jobs, next) {
+jobsSchema.pre('save', function (this: Document & Job, next) {
   const db = this.db.db;
 
   db.collection('settings').findOneAndUpdate({

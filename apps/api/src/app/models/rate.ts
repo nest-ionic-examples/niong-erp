@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Currency } from './currency';
 
 'use strict';
 
@@ -12,7 +13,7 @@ export class Rate {
   date: Date;
 
   @Prop({type: String, default: 'USD', ref: 'currency'})
-  base: string;
+  base: string | Currency;
 
   @Prop({type: JSON})
   rates: JSON;

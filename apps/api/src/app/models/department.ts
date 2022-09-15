@@ -11,19 +11,19 @@ export class Department {
   @Prop({type: ObjectId, ref: 'Department', default: null})
   parentDepartment: ObjectID;
 
-  @Prop({type: ObjectId, ref: 'Employees', default: null})
+  @Prop({type: ObjectId, ref: 'Employee', default: null})
   departmentManager: ObjectID;
 
   @Prop()
   isDevelopment: boolean;
 
-  @Prop([{type: ObjectId, ref: 'Users', default: null}])
+  @Prop([{type: ObjectId, ref: 'User', default: null}])
   users: ObjectID[];
 
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   createdBy: {
@@ -33,7 +33,7 @@ export class Department {
 
   @Prop({
     type: {
-      user: {type: ObjectId, ref: 'Users', default: null},
+      user: {type: ObjectId, ref: 'User', default: null},
       date: {type: Date}
     }
   })

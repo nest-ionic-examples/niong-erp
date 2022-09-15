@@ -3,26 +3,33 @@ import { ObjectID } from 'bson';
 import * as mongoose from 'mongoose';
 import { Document } from 'mongoose';
 import ObjectId = mongoose.Schema.Types.ObjectId;
+import { BillOfMaterial } from './bill-of-material';
+import { Employee } from './employee';
+import { Product } from './product';
+import { Routing } from './routing';
+import { Warehouse } from './warehouse';
+import { Workflow } from './workflow';
+import { User } from './user';
 
 @Schema({collection: 'manufacturingOrder'})
 export class ManufacturingOrder {
-  @Prop({type: ObjectId, ref: 'manufacturingOrder', default: null})
-  source: ObjectID;
+  @Prop({type: ObjectId, ref: 'ManufacturingOrder', default: null})
+  source: string | ObjectID | ManufacturingOrder;
 
-  @Prop({type: ObjectId, ref: 'billOfMaterials', default: null})
-  billOfMaterial: ObjectID;
+  @Prop({type: ObjectId, ref: 'BillOfMaterial', default: null})
+  billOfMaterial: string | ObjectID | BillOfMaterial;
 
   @Prop({type: String, enum: ['1', '2', '3'], default: '1'})
   availability: string;
 
-  @Prop({type: ObjectId, ref: 'Employees', default: null})
-  responsible: ObjectID;
+  @Prop({type: ObjectId, ref: 'Employee', default: null})
+  responsible: string | ObjectID | Employee;
 
   @Prop({type: ObjectId, ref: 'Product', default: null})
-  product: ObjectID;
+  product: string | ObjectID | Product;
 
-  @Prop({type: ObjectId, ref: 'routing', default: null})
-  routing: ObjectID;
+  @Prop({type: ObjectId, ref: 'Routing', default: null})
+  routing: string | ObjectID | Routing;
 
   @Prop({type: Number, default: 0})
   quantity: number;
@@ -33,23 +40,23 @@ export class ManufacturingOrder {
   @Prop({type: String, unique: true, default: 'MO'})
   name: string;
 
-  @Prop({type: ObjectId, ref: 'warehouse', default: null})
-  warehouse: ObjectID;
+  @Prop({type: ObjectId, ref: 'Warehouse', default: null})
+  warehouse: string | ObjectID | Warehouse;
 
-  @Prop({type: ObjectId, ref: 'warehouse', default: null})
-  warehouseTo: ObjectID;
+  @Prop({type: ObjectId, ref: 'Warehouse', default: null})
+  warehouseTo: string | ObjectID | Warehouse;
 
-  @Prop({type: ObjectId, ref: 'workflows', default: null})
-  workflow: ObjectID;
+  @Prop({type: ObjectId, ref: 'Workflow', default: null})
+  workflow: string | ObjectID | Workflow;
 
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   createdBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 
@@ -68,12 +75,12 @@ export class ManufacturingOrder {
 
   @Prop({
     type: {
-      user: {type: ObjectId, ref: 'Users', default: null},
+      user: {type: ObjectId, ref: 'User', default: null},
       date: {type: Date, default: Date.now}
     }
   })
   editedBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 

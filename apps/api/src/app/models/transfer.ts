@@ -1,7 +1,13 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ObjectID } from 'bson';
 import * as mongoose from 'mongoose';
+import { Department } from './department';
+import { JobPosition } from './job-position';
 import ObjectId = mongoose.Schema.Types.ObjectId;
+import { Employee } from './employee';
+import { WeeklyScheduler } from './weekly-scheduler';
+import { ScheduledPay } from './scheduled-pay';
+import { PayrollStructureType } from './payroll-structure-type';
 
 @Schema({collection: 'transfers'})
 export class Transfer {
@@ -12,16 +18,16 @@ export class Transfer {
   status: string;
 
   @Prop({type: ObjectId, ref: 'Department', default: null})
-  department: ObjectID;
+  department: string | ObjectID | Department;
 
   @Prop({type: ObjectId, ref: 'JobPosition', default: null})
-  jobPosition: ObjectID;
+  jobPosition: string | ObjectID | JobPosition;
 
-  @Prop({type: ObjectId, ref: 'Employees', default: null})
-  manager: ObjectID;
+  @Prop({type: ObjectId, ref: 'Employee', default: null})
+  manager: string | ObjectID | Employee;
 
-  @Prop({type: ObjectId, ref: 'weeklyScheduler', default: null})
-  weeklyScheduler: ObjectID;
+  @Prop({type: ObjectId, ref: 'WeeklyScheduler', default: null})
+  weeklyScheduler: string | ObjectID | WeeklyScheduler;
 
   @Prop({type: String, default: ''})
   jobType: string;
@@ -33,13 +39,13 @@ export class Transfer {
   info: string;
 
   @Prop({type: ObjectId, ref: 'Employees'})
-  employee: ObjectID;
+  employee: string | ObjectID | Employee;
 
-  @Prop({type: ObjectId, ref: 'scheduledPays', default: null})
-  scheduledPay: ObjectID;
+  @Prop({type: ObjectId, ref: 'ScheduledPay', default: null})
+  scheduledPay: string | ObjectID | ScheduledPay;
 
-  @Prop({type: ObjectId, ref: 'payrollStructureTypes', default: null})
-  payrollStructureType: ObjectID;
+  @Prop({type: ObjectId, ref: 'PayrollStructureType', default: null})
+  payrollStructureType: string | ObjectID | PayrollStructureType;
 
   @Prop({type: Number})
   transferKey: number;

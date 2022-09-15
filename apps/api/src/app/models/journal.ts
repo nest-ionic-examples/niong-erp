@@ -2,6 +2,8 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ObjectID } from 'bson';
 import * as mongoose from 'mongoose';
 import ObjectId = mongoose.Schema.Types.ObjectId;
+import { User } from './user';
+import { ChartOfAccount } from './chart-of-account';
 
 @Schema(undefined)
 export class Journal {
@@ -32,30 +34,30 @@ export class Journal {
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   createdBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 
   @Prop({
     type: {
-      user: {type: ObjectId, ref: 'Users', default: null},
+      user: {type: ObjectId, ref: 'User', default: null},
       date: {type: Date}
     }
   })
   editedBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 
-  @Prop({type: ObjectId, ref: 'chartOfAccount', default: null})
-  debitAccount: ObjectID;
+  @Prop({type: ObjectId, ref: 'ChartOfAccount', default: null})
+  debitAccount: string | ObjectID | ChartOfAccount;
 
-  @Prop({type: ObjectId, ref: 'chartOfAccount', default: null})
-  creditAccount: ObjectID;
+  @Prop({type: ObjectId, ref: 'ChartOfAccount', default: null})
+  creditAccount: string | ObjectID | ChartOfAccount;
 
 }
 

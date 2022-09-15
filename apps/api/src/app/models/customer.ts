@@ -37,7 +37,7 @@ export class Customer {
   @Prop({type: String, default: ''})
   email: string;
 
-  @Prop({type: ObjectId, ref: 'Customers', default: null})
+  @Prop({type: ObjectId, ref: 'Customer', default: null})
   company: ObjectID;
 
   @Prop({type: ObjectId, ref: 'Department', default: null})
@@ -117,9 +117,9 @@ export class Customer {
     type: {
       isCustomer: {type: Boolean, default: true},
       isSupplier: {type: Boolean, default: false},
-      salesPerson: {type: ObjectId, ref: 'Employees', default: null},
+      salesPerson: {type: ObjectId, ref: 'Employee', default: null},
       salesTeam: {type: ObjectId, ref: 'Department', default: null},
-      implementedBy: {type: ObjectId, ref: 'Customers', default: null},
+      implementedBy: {type: ObjectId, ref: 'Customer', default: null},
       active: {type: Boolean, default: true},
       reference: {type: String, default: ''},
       language: {type: String, default: 'English'},
@@ -138,7 +138,7 @@ export class Customer {
     receiveMessages: number
   };
 
-  @Prop({type: ObjectId, ref: 'Users', default: null})
+  @Prop({type: ObjectId, ref: 'User', default: null})
   relatedUser: ObjectID;
 
   @Prop({type: String, default: '#4d5a75'})
@@ -160,8 +160,8 @@ export class Customer {
 
   @Prop({
     type: {
-      owner: {type: ObjectId, ref: 'Users', default: null},
-      users: [{type: ObjectId, ref: 'Users', default: null}],
+      owner: {type: ObjectId, ref: 'User', default: null},
+      users: [{type: ObjectId, ref: 'User', default: null}],
       group: [{type: ObjectId, ref: 'Department', default: null}]
     }
   })
@@ -178,7 +178,7 @@ export class Customer {
     attachment: {},
     date: {type: Date, default: Date.now},
     user: {
-      _id: {type: ObjectId, ref: 'Users', default: null},
+      _id: {type: ObjectId, ref: 'User', default: null},
       login: String
     }
   }])
@@ -203,7 +203,7 @@ export class Customer {
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   createdBy: {
@@ -214,7 +214,7 @@ export class Customer {
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   editedBy: {
@@ -239,7 +239,7 @@ export class Customer {
   @Prop({type: String, default: ''})
   integrationId: string;
 
-  @Prop({type: ObjectId, ref: 'integrations', default: null})
+  @Prop({type: ObjectId, ref: 'Integration', default: null})
   channel: ObjectID;
 
 }

@@ -12,7 +12,7 @@ export class BillOfMaterial {
   @Prop({type: ObjectId, ref: 'Product', default: null})
   product: ObjectID;
 
-  @Prop({type: ObjectId, ref: 'routing', default: null})
+  @Prop({type: ObjectId, ref: 'Routing', default: null})
   routing: ObjectID;
 
   @Prop({

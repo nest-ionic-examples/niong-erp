@@ -33,7 +33,7 @@ export class History {
   @Prop({type: Object, default: null})
   prevValue: object;
 
-  @Prop({type: ObjectId, ref: 'Users', default: null})
+  @Prop({type: ObjectId, ref: 'User', default: null})
   editedBy: ObjectID;
 
 }

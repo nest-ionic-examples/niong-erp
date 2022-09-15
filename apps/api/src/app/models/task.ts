@@ -2,6 +2,11 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ObjectID } from 'bson';
 import * as mongoose from 'mongoose';
 import ObjectId = mongoose.Schema.Types.ObjectId;
+import { Employee } from './employee';
+import { Project } from './project';
+import { Customer } from './customer';
+import { Workflow } from './workflow';
+import { User } from './user';
 
 @Schema({collection: 'Tasks'})
 export class Task {
@@ -12,10 +17,10 @@ export class Task {
   taskCount: number;
 
   @Prop({type: ObjectId, ref: 'Project', default: null})
-  project: ObjectID;
+  project: string | ObjectID | Project;
 
-  @Prop({type: ObjectId, ref: 'Employees', default: null})
-  assignedTo: ObjectID;
+  @Prop({type: ObjectId, ref: 'Employee', default: null})
+  assignedTo: string | ObjectID | Employee;
 
   @Prop([String])
   tags: string[];
@@ -29,8 +34,8 @@ export class Task {
   @Prop({type: Number, default: 0})
   sequence: number;
 
-  @Prop({type: ObjectId, ref: 'Customers', default: null})
-  customer: ObjectID;
+  @Prop({type: ObjectId, ref: 'Customer', default: null})
+  customer: string | ObjectID | Customer;
 
   @Prop({type: Date, default: Date.now})
   StartDate: Date;
@@ -41,8 +46,8 @@ export class Task {
   @Prop({type: Number, default: 0})
   duration: number;
 
-  @Prop({type: ObjectId, ref: 'workflows', default: null})
-  workflow: ObjectID;
+  @Prop({type: ObjectId, ref: 'Workflow', default: null})
+  workflow: string | ObjectID | Workflow;
 
   @Prop({type: String, default: ''})
   type: string;
@@ -62,11 +67,11 @@ export class Task {
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   createdBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 
@@ -79,11 +84,11 @@ export class Task {
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   editedBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 

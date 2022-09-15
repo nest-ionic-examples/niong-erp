@@ -10,7 +10,7 @@ import { CampaignsController } from './campaigns.controller';
 import { CapacitiesController } from './capacities.controller';
 import { CashTransfersController } from './cash-transfers.controller';
 import { ChannelLinksController } from './channel-links.controller';
-import { ChartAccountsController } from './chart-accounts.controller';
+import { ChartOfAccountsController } from './chart-of-accounts.controller';
 import { CountriesController } from './countries.controller';
 import { CurrenciesController } from './currencies.controller';
 import { CurrencyStoresController } from './currency-stores.controller';
@@ -118,7 +118,7 @@ import { ZonesController } from './zones.controller';
     CapacitiesController,
     CashTransfersController,
     ChannelLinksController,
-    ChartAccountsController,
+    ChartOfAccountsController,
     CountriesController,
     CurrenciesController,
     CurrencyStoresController,

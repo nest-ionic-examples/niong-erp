@@ -25,7 +25,7 @@ export class ImportHistory {
 
   @Prop({
     type: ObjectId,
-    ref: 'Users',
+    ref: 'User',
     default: null
   })
   user: ObjectID;

@@ -10,7 +10,7 @@ import { Campaign, campaignSchema } from './campaign';
 import { Capacity, capacitySchema } from './capacity';
 import { CashTransfer, cashTransferSchema } from './cash-transfer';
 import { ChannelLink, channelLinkSchema } from './channel-link';
-import { ChartAccount, chartAccountSchema } from './chart-account';
+import { ChartOfAccount, chartAccountSchema } from './chart-of-account';
 import { Country, countrySchema } from './country';
 import { CurrencyStore, currencyStoreSchema } from './currency-store';
 import { Currency, currencySchema } from './currency';
@@ -31,21 +31,21 @@ import { GoodsNote, goodsNoteSchema } from './goods-note';
 import { History, historySchema } from './history';
 import { Holiday, holidaySchema } from './holiday';
 import { HoursCash, hoursCashSchema } from './hours-cash';
-import { Images, imagesSchema } from './images';
+import { Image, imageSchema } from './image';
 import { ImportHistory, importHistorySchema } from './import-history';
 import { Import, importSchema } from './import';
 import { Incoterm, incotermSchema } from './incoterm';
 import { Industry, industrySchema } from './industry';
-import { Integrations, integrationsSchema } from './integrations';
+import { Integration, integrationsSchema } from './integration';
 import { Invoice, invoiceSchema } from './invoice';
 import { InvoicingControl, invoicingControlSchema } from './invoicing-control';
 import { JobPosition, jobPositionSchema } from './job-position';
 import { JobType, jobTypeSchema } from './job-type';
-import { Jobs, jobsSchema } from './jobs';
+import { Job, jobsSchema } from './job';
 import { JournalEntry, journalEntrySchema } from './journal-entry';
 import { Journal, journalSchema } from './journal';
 import { Language, languageSchema } from './language';
-import { Locations, locationsSchema } from './locations';
+import { Location, locationsSchema } from './location';
 import { MagentoData, magentoDataSchema } from './magento-data';
 import { ManufacturingOrder, manufacturingOrderSchema } from './manufacturing-order';
 import { MatchMagento, matchMagentoSchema } from './match-magento';
@@ -116,7 +116,7 @@ const providers = MongooseModule.forFeature([
   {name: Capacity.name, schema: capacitySchema},
   {name: CashTransfer.name, schema: cashTransferSchema},
   {name: ChannelLink.name, schema: channelLinkSchema},
-  {name: ChartAccount.name, schema: chartAccountSchema},
+  {name: ChartOfAccount.name, schema: chartAccountSchema},
   {name: Country.name, schema: countrySchema},
   {name: CurrencyStore.name, schema: currencyStoreSchema},
   {name: Currency.name, schema: currencySchema},
@@ -137,21 +137,21 @@ const providers = MongooseModule.forFeature([
   {name: History.name, schema: historySchema},
   {name: Holiday.name, schema: holidaySchema},
   {name: HoursCash.name, schema: hoursCashSchema},
-  {name: Images.name, schema: imagesSchema},
+  {name: Image.name, schema: imageSchema},
   {name: ImportHistory.name, schema: importHistorySchema},
   {name: Import.name, schema: importSchema},
   {name: Incoterm.name, schema: incotermSchema},
   {name: Industry.name, schema: industrySchema},
-  {name: Integrations.name, schema: integrationsSchema},
+  {name: Integration.name, schema: integrationsSchema},
   {name: Invoice.name, schema: invoiceSchema},
   {name: InvoicingControl.name, schema: invoicingControlSchema},
   {name: JobPosition.name, schema: jobPositionSchema},
   {name: JobType.name, schema: jobTypeSchema},
-  {name: Jobs.name, schema: jobsSchema},
+  {name: Job.name, schema: jobsSchema},
   {name: JournalEntry.name, schema: journalEntrySchema},
   {name: Journal.name, schema: journalSchema},
   {name: Language.name, schema: languageSchema},
-  {name: Locations.name, schema: locationsSchema},
+  {name: Location.name, schema: locationsSchema},
   {name: MagentoData.name, schema: magentoDataSchema},
   {name: ManufacturingOrder.name, schema: manufacturingOrderSchema},
   {name: MatchMagento.name, schema: matchMagentoSchema},

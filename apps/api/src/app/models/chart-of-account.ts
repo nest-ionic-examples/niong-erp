@@ -4,7 +4,7 @@ import * as mongoose from 'mongoose';
 import ObjectId = mongoose.Schema.Types.ObjectId;
 
 @Schema({collection: 'chartOfAccount'})
-export class ChartAccount {
+export class ChartOfAccount {
   @Prop({type: Number})
   code: number;
 
@@ -14,7 +14,7 @@ export class ChartAccount {
   @Prop({type: String, default: ''})
   name: string;
 
-  @Prop({type: ObjectId, ref: 'chartOfAccount', default: null})
+  @Prop({type: ObjectId, ref: 'ChartOfAccount', default: null})
   subAccount: ObjectID;
 
   @Prop({type: ObjectId, ref: 'accountsCategory', default: null})
@@ -28,7 +28,7 @@ export class ChartAccount {
 
   @Prop({
     type: {
-      user: {type: ObjectId, ref: 'Users', default: null},
+      user: {type: ObjectId, ref: 'User', default: null},
       date: {type: Date}
     }
   })
@@ -39,7 +39,7 @@ export class ChartAccount {
 
   @Prop({
     type: {
-      user: {type: ObjectId, ref: 'Users', default: null},
+      user: {type: ObjectId, ref: 'User', default: null},
       date: {type: Date, default: Date.now}
     }
   })
@@ -50,4 +50,4 @@ export class ChartAccount {
 
 }
 
-export const chartAccountSchema = SchemaFactory.createForClass(ChartAccount);
+export const chartAccountSchema = SchemaFactory.createForClass(ChartOfAccount);

@@ -2,9 +2,10 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ObjectID } from 'bson';
 import * as mongoose from 'mongoose';
 import ObjectId = mongoose.Schema.Types.ObjectId;
+import { User } from './user';
 
 @Schema({collection: 'locations'})
-export class Locations {
+export class Location {
   @Prop({type: String, default: ''})
   name: string;
 
@@ -20,7 +21,7 @@ export class Locations {
   @Prop({type: String, default: ''})
   groupingD: string;
 
-  @Prop({type: ObjectId, ref: 'warehouse', default: null})
+  @Prop({type: ObjectId, ref: 'Warehouse', default: null})
   warehouse: ObjectID;
 
   @Prop({type: ObjectId, ref: 'zone', default: null})
@@ -29,25 +30,25 @@ export class Locations {
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   createdBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   editedBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 
 }
 
-export const locationsSchema = SchemaFactory.createForClass(Locations);
+export const locationsSchema = SchemaFactory.createForClass(Location);

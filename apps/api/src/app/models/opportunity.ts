@@ -2,6 +2,11 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ObjectID } from 'bson';
 import * as mongoose from 'mongoose';
 import ObjectId = mongoose.Schema.Types.ObjectId;
+import { Customer } from './customer';
+import { Tag } from './tag';
+import { Employee } from './employee';
+import { Department } from './department';
+import { User } from './user';
 
 @Schema({collection: 'Opportunities'})
 export class Opportunity {
@@ -33,14 +38,14 @@ export class Opportunity {
   @Prop({type: String, default: ''})
   tempCompanyField: string;
 
-  @Prop({type: ObjectId, ref: 'Customers', default: null})
-  company: ObjectID;
+  @Prop({type: ObjectId, ref: 'Customer', default: null})
+  company: string | ObjectID | Customer;
 
-  @Prop({type: ObjectId, ref: 'Customers', default: null})
-  customer: ObjectID;
+  @Prop({type: ObjectId, ref: 'Customer', default: null})
+  customer: string | ObjectID | Customer;
 
-  @Prop([{type: ObjectId, ref: 'tags', default: null}])
-  tags: ObjectID[];
+  @Prop([{type: ObjectId, ref: 'Tag', default: null}])
+  tags: (string | ObjectID | Tag)[];
 
   @Prop()
   dateBirth: Date;
@@ -92,11 +97,11 @@ export class Opportunity {
   @Prop({type: String, default: ''})
   func: string;
 
-  @Prop({type: ObjectId, ref: 'Employees', default: null})
-  salesPerson: ObjectID;
+  @Prop({type: ObjectId, ref: 'Employee', default: null})
+  salesPerson: string | ObjectID | Employee;
 
   @Prop({type: ObjectId, ref: 'Department', default: null})
-  salesTeam: ObjectID;
+  salesTeam: string | ObjectID | Department;
 
   @Prop({type: String, default: ''})
   internalNotes: string;
@@ -141,7 +146,7 @@ export class Opportunity {
   @Prop({type: String, default: ''})
   reffered: string;
 
-  @Prop({type: ObjectId, ref: 'workflows', default: null})
+  @Prop({type: ObjectId, ref: 'Workflow', default: null})
   workflow: ObjectID;
 
   @Prop({type: String, enum: ['owner', 'group', 'everyOne'], default: 'everyOne'})
@@ -149,15 +154,15 @@ export class Opportunity {
 
   @Prop({
     type: {
-      owner: {type: ObjectId, ref: 'Users', default: null},
-      users: [{type: ObjectId, ref: 'Users', default: null}],
+      owner: {type: ObjectId, ref: 'User', default: null},
+      users: [{type: ObjectId, ref: 'User', default: null}],
       group: [{type: ObjectId, ref: 'Department', default: null}]
     }
   })
   groups: {
-    owner: ObjectID,
-    users: ObjectID[],
-    group: ObjectID[]
+    owner: string | ObjectID | User,
+    users: (string | ObjectID | User)[],
+    group: (string | ObjectID | Department)[]
   };
 
   @Prop({type: Number, default: 0})
@@ -166,22 +171,22 @@ export class Opportunity {
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   createdBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   editedBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 
@@ -204,7 +209,7 @@ export class Opportunity {
     attachment: {},
     date: {type: Date, default: Date.now},
     user: {
-      _id: {type: ObjectId, ref: 'Users', default: null},
+      _id: {type: ObjectId, ref: 'User', default: null},
       login: String
     }
   }])

@@ -7,7 +7,7 @@ import ObjectId = mongoose.Schema.Types.ObjectId;
 
 @Schema({collection: 'GoodsNote', discriminatorKey: '_type'})
 export class GoodsNote {
-  @Prop({type: ObjectId, ref: 'warehouse', default: null})
+  @Prop({type: ObjectId, ref: 'Warehouse', default: null})
   warehouse: ObjectID;
 
   @Prop({type: String, default: ''})
@@ -16,7 +16,7 @@ export class GoodsNote {
   @Prop({type: Number, default: 1})
   boxes: number;
 
-  @Prop({type: ObjectId, ref: 'shippingMethod', default: null})
+  @Prop({type: ObjectId, ref: 'ShippingMethod', default: null})
   shippingMethod: ObjectID;
 
   @Prop({type: Number, default: 0})
@@ -34,7 +34,7 @@ export class GoodsNote {
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   createdBy: {
@@ -48,7 +48,7 @@ export class GoodsNote {
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   editedBy: {
@@ -59,7 +59,7 @@ export class GoodsNote {
   @Prop({type: ObjectId, ref: 'Order', default: null})
   order: ObjectID;
 
-  @Prop({type: ObjectId, ref: 'manufacturingOrder', default: null})
+  @Prop({type: ObjectId, ref: 'ManufacturingOrder', default: null})
   manufacturingOrder: ObjectID;
 
   @Prop({type: Array, default: []})
@@ -82,7 +82,7 @@ export class GoodsNote {
     quantity: number
   }>[];
 
-  @Prop({type: ObjectId, ref: 'integrations', default: null})
+  @Prop({type: ObjectId, ref: 'Integration', default: null})
   channel: ObjectID;
 
   @Prop()
@@ -111,10 +111,10 @@ export class GoodsOutNote extends GoodsNote {
       pickedOn: Date,
       packedOn: Date,
       printedOn: Date,
-      pickedById: {type: ObjectId, ref: 'Users', default: null},
-      packedById: {type: ObjectId, ref: 'Users', default: null},
-      shippedById: {type: ObjectId, ref: 'Users', default: null},
-      printedById: {type: ObjectId, ref: 'Users', default: null},
+      pickedById: {type: ObjectId, ref: 'User', default: null},
+      packedById: {type: ObjectId, ref: 'User', default: null},
+      shippedById: {type: ObjectId, ref: 'User', default: null},
+      printedById: {type: ObjectId, ref: 'User', default: null},
     }
   })
   status: {
@@ -146,7 +146,7 @@ export class GoodsInNote extends GoodsNote {
     type: {
       received: Boolean,
       receivedOn: Date,
-      receivedById: {type: ObjectId, ref: 'Users', default: null}
+      receivedById: {type: ObjectId, ref: 'User', default: null}
     }
   })
   status: {
@@ -201,7 +201,7 @@ export class StockReturn extends GoodsInNote {
     type: {
       received: Boolean,
       receivedOn: Date,
-      receivedById: {type: ObjectId, ref: 'Users', default: null}
+      receivedById: {type: ObjectId, ref: 'User', default: null}
     }
   })
   status: {
@@ -223,7 +223,7 @@ export class StockReturn extends GoodsInNote {
     product: {type: ObjectId, ref: 'Product', default: null},
     cost: {type: Number, default: 0},
     quantity: Number,
-    warehouse: {type: ObjectId, ref: 'warehouse', default: null}
+    warehouse: {type: ObjectId, ref: 'Warehouse', default: null}
   }])
   orderRows: {
     _id: false,
@@ -242,7 +242,7 @@ export const stockReturnSchema = SchemaFactory.createForClass(StockReturn);
 
 @Schema()
 export class StockTransactions extends GoodsInNote {
-  @Prop({type: ObjectId, ref: 'warehouse', default: null})
+  @Prop({type: ObjectId, ref: 'Warehouse', default: null})
   warehouseTo: ObjectID;
 
   @Prop({
@@ -255,10 +255,10 @@ export class StockTransactions extends GoodsInNote {
       receivedOn: Date,
       packedOn: Date,
       printedOn: Date,
-      receivedById: {type: ObjectId, ref: 'Users', default: null},
-      packedById: {type: ObjectId, ref: 'Users', default: null},
-      shippedById: {type: ObjectId, ref: 'Users', default: null},
-      printedById: {type: ObjectId, ref: 'Users', default: null}
+      receivedById: {type: ObjectId, ref: 'User', default: null},
+      packedById: {type: ObjectId, ref: 'User', default: null},
+      shippedById: {type: ObjectId, ref: 'User', default: null},
+      printedById: {type: ObjectId, ref: 'User', default: null}
     }
   })
   status: {

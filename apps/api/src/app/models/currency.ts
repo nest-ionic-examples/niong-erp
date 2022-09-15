@@ -3,8 +3,8 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 @Schema({collection: 'currency'})
 export class Currency {
-  @Prop({type: 'String'})
-  _id: 'String';
+  @Prop({type: String})
+  _id: string;
 
   @Prop({type: String, default: ''})
   name: string;

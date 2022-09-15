@@ -2,20 +2,24 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ObjectID } from 'bson';
 import * as mongoose from 'mongoose';
 import ObjectId = mongoose.Schema.Types.ObjectId;
+import { Project } from './project';
+import { Employee } from './employee';
+import { BonusType } from './bonus-type';
+import { ProjectPosition } from './project-position';
 
 @Schema({collection: 'projectMembers'})
 export class ProjectMember {
   @Prop({type: ObjectId, ref: 'Project'})
-  projectId: ObjectID;
+  projectId: string | ObjectID | Project;
 
-  @Prop({type: ObjectId, ref: 'Employees'})
-  employeeId: ObjectID;
+  @Prop({type: ObjectId, ref: 'Employee'})
+  employeeId: string | ObjectID | Employee;
 
-  @Prop({type: ObjectId, ref: 'bonusType'})
-  bonusId: ObjectID;
+  @Prop({type: ObjectId, ref: 'BonusType'})
+  bonusId: string | ObjectID | BonusType;
 
-  @Prop({type: ObjectId, ref: 'projectPosition'})
-  projectPositionId: ObjectID;
+  @Prop({type: ObjectId, ref: 'ProjectPosition'})
+  projectPositionId: string | ObjectID | ProjectPosition;
 
   @Prop({type: Date})
   startDate: Date;

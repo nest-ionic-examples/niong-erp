@@ -2,6 +2,8 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ObjectID } from 'bson';
 import * as mongoose from 'mongoose';
 import ObjectId = mongoose.Schema.Types.ObjectId;
+import { Currency } from './currency';
+import { User } from './user';
 
 
 @Schema({collection: 'journalentries', discriminatorKey: '_type'})
@@ -15,39 +17,39 @@ export class JournalEntry {
   @Prop({type: ObjectId, ref: 'journal', default: null})
   journal: ObjectID;
 
-  @Prop({type: ObjectId, ref: 'chartOfAccount', default: null})
+  @Prop({type: ObjectId, ref: 'ChartOfAccount', default: null})
   account: ObjectID;
 
   @Prop({
     type: {
-      _id: {type: String, ref: 'currency', default: null},
+      _id: {type: String, ref: 'Currency', default: null},
       rate: {type: Number, default: 1}
     }
   })
   currency: {
-    _id: string,
+    _id: string | Currency,
     rate: number
   };
 
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   createdBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   editedBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 

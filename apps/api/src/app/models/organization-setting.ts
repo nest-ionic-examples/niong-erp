@@ -2,6 +2,13 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ObjectID } from 'bson';
 import * as mongoose from 'mongoose';
 import ObjectId = mongoose.Schema.Types.ObjectId;
+import { Currency } from './currency';
+import { User } from './user';
+import { Industry } from './industry';
+import { Language } from './language';
+import { ChartOfAccount } from './chart-of-account';
+import { PaymentMethod } from './payment-method';
+import { PaymentTerm } from './payment-term';
 
 @Schema({collection: 'orgSettings'})
 export class OrganizationSetting {
@@ -39,14 +46,14 @@ export class OrganizationSetting {
   @Prop({type: String, default: ''})
   website: string;
 
-  @Prop({type: String, ref: 'currency', default: null})
-  currency: string;
+  @Prop({type: String, ref: 'Currency', default: null})
+  currency: string | Currency;
 
   @Prop({type: ObjectId, ref: 'Industry', default: null})
-  industry: ObjectID;
+  industry: string | ObjectID | Industry;
 
-  @Prop({type: ObjectId, ref: 'Users', default: null})
-  contact: ObjectID;
+  @Prop({type: ObjectId, ref: 'User', default: null})
+  contact: string | ObjectID | User;
 
   @Prop()
   startDate: Date;
@@ -54,41 +61,41 @@ export class OrganizationSetting {
   @Prop({type: Boolean, default: true})
   defaultEmail: boolean;
 
-  @Prop({type: ObjectId, ref: 'languages', default: null})
-  language: ObjectID;
+  @Prop({type: ObjectId, ref: 'Language', default: null})
+  language: string | ObjectID | Language;
 
-  @Prop({type: ObjectId, ref: 'Users', default: null})
-  user: ObjectID;
+  @Prop({type: ObjectId, ref: 'User', default: null})
+  user: string | ObjectID | User;
 
   @Prop({type: String, default: ''})
   contactName: string;
 
-  @Prop({type: ObjectId, ref: 'chartOfAccount', default: null})
-  salesTax: ObjectID;
+  @Prop({type: ObjectId, ref: 'ChartOfAccount', default: null})
+  salesTax: string | ObjectID | ChartOfAccount;
 
-  @Prop({type: ObjectId, ref: 'chartOfAccount', default: null})
-  purchaseTax: ObjectID;
+  @Prop({type: ObjectId, ref: 'ChartOfAccount', default: null})
+  purchaseTax: string | ObjectID | ChartOfAccount;
 
-  @Prop({type: ObjectId, ref: 'chartOfAccount', default: null})
-  payableTax: ObjectID;
+  @Prop({type: ObjectId, ref: 'ChartOfAccount', default: null})
+  payableTax: string | ObjectID | ChartOfAccount;
 
-  @Prop({type: ObjectId, ref: 'chartOfAccount', default: null})
-  carriedTax: ObjectID;
+  @Prop({type: ObjectId, ref: 'ChartOfAccount', default: null})
+  carriedTax: string | ObjectID | ChartOfAccount;
 
-  @Prop({type: ObjectId, ref: 'chartOfAccount', default: null})
-  shipping: ObjectID;
+  @Prop({type: ObjectId, ref: 'ChartOfAccount', default: null})
+  shipping: string | ObjectID | ChartOfAccount;
 
-  @Prop({type: ObjectId, ref: 'chartOfAccount', default: null})
-  discount: ObjectID;
+  @Prop({type: ObjectId, ref: 'ChartOfAccount', default: null})
+  discount: string | ObjectID | ChartOfAccount;
 
-  @Prop({type: ObjectId, ref: 'chartOfAccount', default: null})
-  workInProgress: ObjectID;
+  @Prop({type: ObjectId, ref: 'ChartOfAccount', default: null})
+  workInProgress: string | ObjectID | ChartOfAccount;
 
   @Prop({type: ObjectId, ref: 'PaymentMethod', default: null})
-  bankAccount: ObjectID;
+  bankAccount: string | ObjectID | PaymentMethod;
 
   @Prop({type: ObjectId, ref: 'PaymentTerm', default: null})
-  paymentTerms: ObjectID;
+  paymentTerms: string | ObjectID | PaymentTerm;
 
 }
 

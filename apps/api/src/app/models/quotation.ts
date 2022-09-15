@@ -3,6 +3,18 @@ import { ObjectID } from 'bson';
 import * as mongoose from 'mongoose';
 import { Document } from 'mongoose';
 import ObjectId = mongoose.Schema.Types.ObjectId;
+import { Customer } from './customer';
+import { Project } from './project';
+import { DeliverTo } from './deliver-to';
+import { Destination } from './destination';
+import { Incoterm } from './incoterm';
+import { InvoicingControl } from './invoicing-control';
+import { PaymentTerm } from './payment-term';
+import { Workflow } from './workflow';
+import { Product } from './product';
+import { Job } from './job';
+import { User } from './user';
+import { Department } from './department';
 
 'use strict';
 
@@ -11,7 +23,7 @@ import ObjectId = mongoose.Schema.Types.ObjectId;
 export class Quotation {
   @Prop({
     type: {
-      _id: {type: String, ref: 'currency', default: null},
+      _id: {type: String, ref: 'Currency', default: null},
       rate: {type: Number, default: 0} // changed default to '0' for catching errors
     }
   })
@@ -29,14 +41,14 @@ export class Quotation {
   @Prop({type: Boolean, default: false})
   isOrder: boolean;
 
-  @Prop({type: ObjectId, ref: 'Customers', default: null})
-  supplier: ObjectID;
+  @Prop({type: ObjectId, ref: 'Customer', default: null})
+  supplier: string | ObjectID | Customer;
 
   @Prop({type: ObjectId, ref: 'Project', default: null})
-  project: ObjectID;
+  project: string | ObjectID | Project;
 
   @Prop({type: ObjectId, ref: 'DeliverTo', default: null})
-  deliverTo: ObjectID;
+  deliverTo: string | ObjectID | DeliverTo;
 
   @Prop({type: Date, default: Date.now})
   orderDate: Date;
@@ -48,19 +60,19 @@ export class Quotation {
   name: string;
 
   @Prop({type: ObjectId, ref: 'Destination', default: null})
-  destination: ObjectID;
+  destination: string | ObjectID | Destination;
 
   @Prop({type: ObjectId, ref: 'Incoterm', default: null})
-  incoterm: ObjectID;
+  incoterm: string | ObjectID | Incoterm;
 
   @Prop({type: ObjectId, ref: 'InvoicingControl', default: null})
-  invoiceControl: ObjectID;
+  invoiceControl: string | ObjectID | InvoicingControl;
 
   @Prop({type: Boolean, default: false})
   invoiceRecived: boolean;
 
   @Prop({type: ObjectId, ref: 'PaymentTerm', default: null})
-  paymentTerm: ObjectID;
+  paymentTerm: string | ObjectID | PaymentTerm;
 
   @Prop({
     type: {
@@ -91,7 +103,7 @@ export class Quotation {
     unitPrice: {type: Number, default: 0},
     product: {type: ObjectId, ref: 'Product', default: null},
     description: {type: String, default: ''},
-    jobs: {type: ObjectId, ref: 'jobs', default: null}
+    jobs: {type: ObjectId, ref: 'Job', default: null}
   }])
   products: {
     _id: false,
@@ -101,13 +113,13 @@ export class Quotation {
     taxes: number,
     subTotal: number,
     unitPrice: number,
-    product: ObjectID,
+    product: string | ObjectID | Product,
     description: string,
-    jobs: ObjectID
+    jobs: string | ObjectID | Job
   }[];
 
-  @Prop({type: ObjectId, ref: 'workflows', default: null})
-  workflow: ObjectID;
+  @Prop({type: ObjectId, ref: 'Workflow', default: null})
+  workflow: string | ObjectID | Workflow;
 
   @Prop({type: String, enum: ['owner', 'group', 'everyOne'], default: 'everyOne'})
   whoCanRW: string;
@@ -120,15 +132,15 @@ export class Quotation {
 
   @Prop({
     type: {
-      owner: {type: ObjectId, ref: 'Users', default: null},
-      users: [{type: ObjectId, ref: 'Users', default: null}],
+      owner: {type: ObjectId, ref: 'User', default: null},
+      users: [{type: ObjectId, ref: 'User', default: null}],
       group: [{type: ObjectId, ref: 'Department', default: null}]
     }
   })
   groups: {
-    owner: ObjectID,
-    users: ObjectID[],
-    group: ObjectID[]
+    owner: string | ObjectID | User,
+    users: (string | ObjectID | User)[],
+    group: string | ObjectID | Department[]
   };
 
   @Prop({type: Date, default: Date.now})
@@ -137,22 +149,22 @@ export class Quotation {
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   createdBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   editedBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 

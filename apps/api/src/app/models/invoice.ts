@@ -3,6 +3,26 @@ import { ObjectID } from 'bson';
 import * as mongoose from 'mongoose';
 import { Document } from 'mongoose';
 import ObjectId = mongoose.Schema.Types.ObjectId;
+import { Customer } from './customer';
+import { Journal } from './journal';
+import { Currency } from './currency';
+import { Employee } from './employee';
+import { PaymentTerm } from './payment-term';
+import { PaymentMethod } from './payment-method';
+import { Payment } from './payment';
+import { Workflow } from './workflow';
+import { User } from './user';
+import { Department } from './department';
+import { Integration } from './integration';
+import { Project } from './project';
+import { Product } from './product';
+import { Job } from './job';
+import { PayRoll } from './pay-roll';
+import { Order } from './order';
+import { Quotation } from './quotation';
+import { Tax } from './tax';
+import { ChartOfAccount } from './chart-of-account';
+import { ExpenseCategory } from './expense-category';
 
 
 @Schema({collection: 'Invoice', discriminatorKey: '_type'})
@@ -18,11 +38,11 @@ export class Base {
   @Prop({type: Boolean, default: true})
   forSales: boolean;
 
-  @Prop({type: ObjectId, ref: 'Customers', default: null})
-  supplier: ObjectID;
+  @Prop({type: ObjectId, ref: 'Customer', default: null})
+  supplier: string | ObjectID | Customer;
 
   @Prop({type: ObjectId, ref: 'Quotation', default: null})
-  sourceDocument: ObjectID;
+  sourceDocument: string | ObjectID | Quotation | object;
 
   @Prop({type: String, default: 'free'})
   paymentReference: string;
@@ -36,28 +56,28 @@ export class Base {
   @Prop()
   paymentDate: Date;
 
-  @Prop({type: ObjectId, ref: 'journal', default: null})
-  journal: ObjectID;
+  @Prop({type: ObjectId, ref: 'Journal', default: null})
+  journal: string | ObjectID | Journal;
 
   @Prop({
     type: {
-      _id: {type: String, ref: 'currency', default: ''},
+      _id: {type: String, ref: 'Currency', default: ''},
       rate: {type: Number, default: 1}
     }
   })
   currency: {
-    _id: string,
+    _id: string | Currency,
     rate: number
   };
 
-  @Prop({type: ObjectId, ref: 'Employees', default: null})
-  salesPerson: ObjectID;
+  @Prop({type: ObjectId, ref: 'Employee', default: null})
+  salesPerson: string | ObjectID | Employee;
 
   @Prop({type: ObjectId, ref: 'PaymentTerm', default: null})
-  paymentTerms: ObjectID;
+  paymentTerms: string | ObjectID | PaymentTerm;
 
   @Prop({type: ObjectId, ref: 'PaymentMethod', default: null})
-  paymentMethod: ObjectID;
+  paymentMethod: string | ObjectID | PaymentMethod;
 
   @Prop({
     type: {
@@ -79,25 +99,25 @@ export class Base {
   };
 
   @Prop([{type: ObjectId, ref: 'Payment', default: null}])
-  payments: ObjectID[];
+  payments: (string | ObjectID | Payment)[];
 
-  @Prop({type: ObjectId, ref: 'workflows', default: null})
-  workflow: ObjectID;
+  @Prop({type: ObjectId, ref: 'Workflow', default: null})
+  workflow: string | ObjectID | Workflow;
 
   @Prop({type: String, enum: ['owner', 'group', 'everyOne'], default: 'everyOne'})
-  whoCanRW: string;
+  whoCanRW: 'owner' | 'group' | 'everyOne';
 
   @Prop({
     type: {
-      owner: {type: ObjectId, ref: 'Users', default: null},
-      users: [{type: ObjectId, ref: 'Users', default: null}],
+      owner: {type: ObjectId, ref: 'User', default: null},
+      users: [{type: ObjectId, ref: 'User', default: null}],
       group: [{type: ObjectId, ref: 'Department', default: null}]
     }
   })
   groups: {
-    owner: ObjectID,
-    users: ObjectID[],
-    group: ObjectID[]
+    owner: string | ObjectID | User,
+    users: (string | ObjectID | User)[],
+    group: (string | ObjectID | Department)[]
   };
 
   @Prop({type: Date, default: Date.now})
@@ -106,27 +126,27 @@ export class Base {
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   createdBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 
   @Prop({
     type: {
       date: {type: Date, default: Date.now},
-      user: {type: ObjectId, ref: 'Users', default: null}
+      user: {type: ObjectId, ref: 'User', default: null}
     }
   })
   editedBy: {
-    user: ObjectID,
+    user: string | ObjectID | User,
     date: Date
   };
 
-  @Prop({type: ObjectId, ref: 'integrations', default: null})
-  channel: ObjectID;
+  @Prop({type: ObjectId, ref: 'Integration', default: null})
+  channel: string | ObjectID | Integration;
 
   @Prop({type: Array, default: []})
   attachments: [];
@@ -147,7 +167,7 @@ export class Base {
   emailed: boolean;
 
   @Prop({type: ObjectId, ref: 'Project', default: null})
-  project: ObjectID;
+  project: string | ObjectID | Project;
 
   @Prop({type: String, default: ''})
   integrationId: string;
@@ -171,7 +191,7 @@ export class JobsInvoice extends Base {
     unitPrice: Number,
     product: {type: ObjectId, ref: 'Product', default: null},
     description: {type: String, default: ''},
-    jobs: {type: ObjectId, ref: 'jobs', default: null},
+    jobs: {type: ObjectId, ref: 'Job', default: null},
     taxes: {type: Number, default: 0},
     subTotal: Number
   }])
@@ -179,15 +199,15 @@ export class JobsInvoice extends Base {
     _id: false,
     quantity: number,
     unitPrice: number,
-    product: ObjectID,
+    product: string | ObjectID | Product,
     description: string,
-    jobs: ObjectID,
+    jobs: string | ObjectID | Job,
     taxes: number,
     subTotal: number
   }[];
 
   @Prop({type: ObjectId, ref: 'Project', default: null})
-  project: ObjectID;
+  project: string | ObjectID | Project;
 
 }
 
@@ -202,7 +222,7 @@ export class WriteOff extends Base {
     unitPrice: Number,
     product: {type: ObjectId, ref: 'Product', default: null},
     description: {type: String, default: ''},
-    jobs: {type: ObjectId, ref: 'jobs', default: null},
+    jobs: {type: ObjectId, ref: 'Job', default: null},
     taxes: {type: Number, default: 0},
     subTotal: Number
 
@@ -211,15 +231,15 @@ export class WriteOff extends Base {
     _id: false,
     quantity: number,
     unitPrice: number,
-    product: ObjectID,
+    product: string | ObjectID | Product,
     description: string,
-    jobs: ObjectID,
+    jobs: string | ObjectID | Job,
     taxes: number,
     subTotal: number
   }[];
 
   @Prop({type: ObjectId, ref: 'Project', default: null})
-  project: ObjectID;
+  project: string | ObjectID | Project;
 
 }
 
@@ -247,7 +267,7 @@ export class PayRollInvoice extends Base {
   }])
   products: {
     _id: false,
-    product: ObjectID[],
+    product: (string | ObjectID | PayRoll)[],
     paid: number,
     diff: number
   }[];
@@ -260,7 +280,7 @@ export const payRollInvoiceSchema = SchemaFactory.createForClass(PayRollInvoice)
 @Schema()
 export class Invoices extends Base {
   @Prop({type: ObjectId, ref: 'Order', default: null})
-  sourceDocument: ObjectID;
+  sourceDocument: string | ObjectID | Order;
 
 }
 
@@ -270,7 +290,7 @@ export const invoicesSchema = SchemaFactory.createForClass(Invoices);
 @Schema()
 export class PurchaseInvoices extends Base {
   @Prop({type: ObjectId, ref: 'Order', default: null})
-  sourceDocument: ObjectID;
+  sourceDocument: string | ObjectID | Order;
 
 }
 
@@ -287,28 +307,28 @@ export class Invoice extends Base {
     description: {type: String, default: ''},
     taxes: [{
       _id: false,
-      taxCode: {type: ObjectId, ref: 'taxes', default: null},
+      taxCode: {type: ObjectId, ref: 'Tax', default: null},
       tax: {type: Number, default: 0}
     }],
 
     subTotal: Number,
-    debitAccount: {type: ObjectId, ref: 'chartOfAccount', default: null},
-    creditAccount: {type: ObjectId, ref: 'chartOfAccount', default: null}
+    debitAccount: {type: ObjectId, ref: 'ChartOfAccount', default: null},
+    creditAccount: {type: ObjectId, ref: 'ChartOfAccount', default: null}
   }])
   products: Partial<{
     _id: false,
     quantity: number,
     unitPrice: number,
-    product: ObjectID,
+    product: string | ObjectID | Product | object,
     description: string,
     taxes: {
       _id: false,
-      taxCode: ObjectID,
+      taxCode: string | ObjectID | Tax,
       tax: number
     }[],
     subTotal: number,
-    debitAccount: ObjectID,
-    creditAccount: ObjectID
+    debitAccount: string | ObjectID | ChartOfAccount,
+    creditAccount: string | ObjectID | ChartOfAccount
   }>[];
 
 }
@@ -318,8 +338,8 @@ export const invoiceSchema = SchemaFactory.createForClass(Invoice);
 
 @Schema()
 export class ExpensesInvoice extends Invoice {
-  @Prop({type: ObjectId, ref: 'expensesCategory', default: null})
-  expensesCategory: ObjectID;
+  @Prop({type: ObjectId, ref: 'ExpenseCategory', default: null})
+  expensesCategory: string | ObjectID | ExpenseCategory;
 
 }
 
@@ -332,11 +352,11 @@ export class DividendInvoice extends Invoice {
     _id: false,
     quantity: {type: Number, default: 1},
     unitPrice: Number,
-    product: {type: ObjectId, ref: 'Employees', default: null},
+    product: {type: ObjectId, ref: 'Employee', default: null},
     description: {type: String, default: ''},
     taxes: [{
       _id: false,
-      taxCode: {type: ObjectId, ref: 'taxes', default: null},
+      taxCode: {type: ObjectId, ref: 'Tax', default: null},
       tax: {type: Number, default: 0}
     }],
 
@@ -346,11 +366,11 @@ export class DividendInvoice extends Invoice {
     _id: false,
     quantity: number,
     unitPrice: number,
-    product: ObjectID,
+    product: string | ObjectID | Employee,
     description: string,
     taxes: {
       _id: false,
-      taxCode: ObjectID,
+      taxCode: string | ObjectID | Tax,
       tax: number
     }[],
     subTotal: number
